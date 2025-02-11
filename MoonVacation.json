@@ -1,0 +1,16 @@
+{
+	"id": "JimbosMoonVacation",
+	"name": "Jimbo's Moon Vacation",
+    "display_name": "MoonVacation",
+	"author": ["MorningCoffee"],
+	"description": "Jimbo's going to the moon! Enjoy Balatro with new Lunar Cards, Reverse Tarot Cards, and more! Designed to blend as naturally as possible with the vanilla expereience.",
+	"prefix": "moon",
+	"main_file": "MoonVacation.lua",
+	"priority": 0,
+	"badge_colour": "5b5f8b",
+	"badge_text_colour": "FFFFFF",
+	"version": "0.1.0",
+	"dependencies": [
+		"Steamodded (>=1.0.0~ALPHA-1409a)"
+	]
+}
