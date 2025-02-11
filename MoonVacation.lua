@@ -7,34 +7,41 @@
 ----------------------------------------------
 ------------MOD CODE -------------------------
 
+SMODS.atlas{
+    key = 'reverse',
+    path = "Reverses.png",
+    px = 71,
+    py = 95
+}
+
 SMODS.ConsumableType{
-    key = 'ReverseConsumableType',
+    key = 'reverse_consumable_type',
 
     collection_rows = {4, 5},
-    primary_colour = G.C.HEX(a61a2000),
-    secondary_colour = G.C.HEX(a61a2000),
+    primary_colour = HEX('a61a20'),
+    secondary_colour = HEX('a61a20'),
 
     loc_txt = {
         collection = 'Reverse Tarot Cards',
         name = 'Reverse Tarot',
         undiscovered = {
-            name = 'Undiscovered Reversal',
-            text = {'Find in an unseeded run', 'to discover this card.'}
+            name = 'Undiscovered Reverse',
+            text = {'Purchase or use', 'this card in an', 'unseeded run to', 'learn what it does'}
         },
         shop_rate = 100
     }
 }
 
 SMODS.UndiscoveredSprite{
-    key = "ReverseConsumableType",
-    atlas = 'Tarot',
-    pos = {x = 0, y = 0}
+    key = "reverse_consumable_type",
+    atlas = 'Reverse',
+    pos = {x = 3, y = 3}
 }
 
 SMODS.Consumable{
-    key = 'Reverse',
-    set = 'ReverseConsumableType',
-    atlas = 'Tarot',
+    key = 'reverse_fool',
+    set = 'reverse_consumable_type',
+    atlas = 'reverse',
     pos = {x = 0, y = 0},
 
     loc_txt = {
@@ -43,6 +50,56 @@ SMODS.Consumable{
             "Creates the last Spectral, Lunar, or Reverse card",
             "used during this run",
             "(looF ehT and Soul excluded)"
+        }
+    },
+
+    config = {
+        extra = {
+            cards = 5,
+        }
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.cards}}
+    end,
+}
+
+SMODS.ConsumableType{
+    key = 'lunar_consumable_type',
+
+    collection_rows = {4, 5},
+    primary_colour = HEX('5b5f8b'),
+    secondary_colour = HEX('5b5f8b'),
+
+    loc_txt = {
+        collection = 'Lunar Cards',
+        name = 'Lunar',
+        undiscovered = {
+            name = 'Undiscovered Lunar',
+            text = {'Purchase or use', 'this card in an', 'unseeded run to', 'learn what it does'}
+        },
+        shop_rate = 100
+    }
+}
+
+SMODS.UndiscoveredSprite{
+    key = "lunar_consumable_type",
+    atlas = 'Planet',
+    pos = {x = 0, y = 0}
+}
+
+SMODS.Consumable{
+    key = 'luna',
+    set = 'lunar_consumable_type',
+    atlas = 'Planet',
+    pos = {x = 0, y = 0},
+
+    loc_txt = {
+        name = "Luna",
+        text = {
+            "Permanently upgrade all Aces",
+            "+3 Chips",
+            "+2 Mult"
         }
     },
 
