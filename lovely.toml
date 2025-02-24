@@ -1,0 +1,130 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Add new colors for Reverse and Lunar cards
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = "RENTAL = HEX('b18f43'),"
+position = 'after'
+match_indent = true
+payload = '''
+    REVERSE = HEX('a61a20'),
+    LUNAR = HEX('5b5f8b'),
+'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "legendary = G.C.RARITY[4],"
+position = 'after'
+match_indent = true
+payload = '''
+    reverse = G.C.REVERSE,
+    lunar = G.C.LUNAR,
+'''
+
+# Add reverse tarot upgrade tracking
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+        probabilities = {
+            normal = 1,
+        },
+'''
+position = 'after'
+match_indent = true
+payload = '''
+        reverse_upgrades = {
+            lucky = 0,
+            mult = 0,
+            bonus = 0,
+            wild = 0,
+            steel = 0,
+            glass = 0,
+            gold = 0,
+            stone = 0,
+        },
+'''
+times = 1
+
+# Factor in reverse magician upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then"
+position = 'at'
+match_indent = true
+payload = "if pseudorandom('lucky_mult') < (G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)/5 then"
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then"
+position = 'at'
+match_indent = true
+payload = "if pseudorandom('lucky_money') < (G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)/15 then"
+times = 1
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.effect == 'Lucky Card' then loc_vars = \{G.GAME.probabilities.normal'''
+position = 'at'
+payload = '''elseif _c.effect == 'Lucky Card' then loc_vars = {(G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)'''
+
+
+# [UNDER CONSTRUCTION] Patches to allow permanent extra mult, like that of permanent extra chips from sources like Hiker
+
+# [[patches]]
+# [patches.pattern]
+# target = "functions/common_events.lua"
+# pattern = '''
+#         if specific_vars.bonus_chips then
+#             localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {specific_vars.bonus_chips}}
+#         end
+# '''
+# position = "after"
+# match_indent = true
+# payload = '''
+# if specific_vars.bonus_mult then
+#     localize{type = 'other', key = 'card_extra_mult', nodes = desc_nodes, vars = {specific_vars.bonus_mult}}
+# end
+# '''
+# times = 1
+
+# [[patches]]
+# [patches.pattern]
+# target = "functions/common_events.lua"
+# pattern = '''
+#         if _c.name ~= 'Stone Card' and ((specific_vars and specific_vars.bonus_chips) or (cfg.bonus ~= 0 and cfg.bonus)) then
+#             localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {((specific_vars and specific_vars.bonus_chips) or cfg.bonus)}}
+#         end
+# '''
+# position = "after"
+# match_indent = true
+# payload = '''
+# if specific_vars and specific_vars.bonus_mult then
+#     localize{type = 'other', key = 'card_extra_mult', nodes = desc_nodes, vars = {specific_vars.bonus_mult}}
+# end
+# '''
+# times = 1
+
+# [[patches]]
+# [patches.pattern]
+# target = "card.lua"
+# pattern = '''
+#         loc_vars = { playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour,
+#                     nominal_chips = self.base.nominal > 0 and self.base.nominal or nil,
+#                     bonus_chips = (self.ability.bonus + (self.ability.perma_bonus or 0)) > 0 and (self.ability.bonus + (self.ability.perma_bonus or 0)) or nil,
+# '''
+# position = "after"
+# match_indent = true
+# payload = '''
+#         bonus_mult = (self.ability.perma_mult and self.ability.perma_mult > 0) and self.ability.perma_mult or nil,
+# '''
+# times = 1

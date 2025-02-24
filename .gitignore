@@ -42,3 +42,4 @@ luac.out
 # Other
 *.code-workspace
 *.luarc.json
+*.xcf
