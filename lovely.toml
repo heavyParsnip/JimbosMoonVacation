@@ -51,7 +51,7 @@ payload = '''
 '''
 times = 1
 
-# Factor in reverse magician upgrades
+# Factor in reverse magician upgrades & show in UI
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -59,7 +59,6 @@ pattern = "if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then"
 position = 'at'
 match_indent = true
 payload = "if pseudorandom('lucky_mult') < (G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)/5 then"
-times = 1
 
 [[patches]]
 [patches.pattern]
@@ -68,15 +67,47 @@ pattern = "if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then"
 position = 'at'
 match_indent = true
 payload = "if pseudorandom('lucky_money') < (G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)/15 then"
-times = 1
 
 [[patches]]
 [patches.regex]
 target = "functions/common_events.lua"
 pattern = '''elseif _c.effect == 'Lucky Card' then loc_vars = \{G.GAME.probabilities.normal'''
-position = 'at'
-payload = '''elseif _c.effect == 'Lucky Card' then loc_vars = {(G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky)'''
+position = 'after'
+payload = '''+G.GAME.reverse_upgrades.lucky'''
 
+# Reverse empress upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+        return self.ability.mult
+    end
+'''
+position = 'before'
+match_indent = true
+payload = '''
+        if self.ability.effect == "Mult Card" then
+            return self.ability.mult + (G.GAME.reverse_upgrades.mult*3)
+        end
+'''
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''if _c.effect == 'Mult Card' then loc_vars = \{'''
+position = 'after'
+payload = '''(G.GAME.reverse_upgrades.mult*3)+'''
+
+
+
+# Factor in reverse empress upgrades?
+# [[patches]]
+# [patches.regex]
+# target = "game.lua"
+# pattern = '''m_mult =    \{max = 500, order = 3, name = "Mult", set = "Enhanced", pos = \{x=2,y=1}, effect = "Mult Card", label = "Mult Card", config = \{mult = 4'''
+# position = 'at'
+# match_indent = true
+# payload = '''m_mult =    {max = 500, order = 3, name = "Mult", set = "Enhanced", pos = {x=2,y=1}, effect = "Mult Card", label = "Mult Card", config = {mult = G.GAME.dollars'''
 
 # [UNDER CONSTRUCTION] Patches to allow permanent extra mult, like that of permanent extra chips from sources like Hiker
 

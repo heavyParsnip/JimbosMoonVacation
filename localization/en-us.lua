@@ -25,9 +25,9 @@ return {
             c_moon_reversehighpriestess = {
                 name = "ssetseirP hgiH ehT",
                 text = {
-                    "Creates up to {C:attention}2{}",
-                    "random {C:lunar}Lunar{} cards",
-                    "{C:inactive}(Must have room){}"
+                    "Creates up to {C:attention}4{}",
+                    "random {C:dark_edition}Negative",
+                    "{C:lunar}Lunar{} cards"
                 }
             },
             -- III
@@ -192,7 +192,139 @@ return {
                     "in your hand"
                 }
             }
-        }
+        },
+        Lunar = {
+            -- Luna
+            c_moon_luna = {
+                name = "Luna",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Ganymede
+            c_moon_ganymede = {
+                name = "Ganymede",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Titan
+            c_moon_titan = {
+                name = "Titan",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Callisto
+            c_moon_callisto = {
+                name = "Callisto",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Io
+            c_moon_io = {
+                name = "Io",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Europa
+            c_moon_europa = {
+                name = "Europa",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Triton
+            c_moon_triton = {
+                name = "Triton",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Titania
+            c_moon_titania = {
+                name = "Titania",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Rhea
+            c_moon_rhea = {
+                name = "Rhea",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Charon
+            c_moon_charon = {
+                name = "Charon",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Dysnomia
+            c_moon_dysnomia = {
+                name = "Dysnomia",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Phobos
+            c_moon_phobos = {
+                name = "Phobos",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            },
+            -- Deimos
+            c_moon_deimos = {
+                name = "Deimos",
+                text = {
+                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#s",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                }
+            }
+        },
     },
     misc = {
         dictionary = {
