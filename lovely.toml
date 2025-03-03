@@ -98,64 +98,133 @@ pattern = '''if _c.effect == 'Mult Card' then loc_vars = \{'''
 position = 'after'
 payload = '''(G.GAME.reverse_upgrades.mult*3)+'''
 
+# Reverse hierophant upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+ return self.base.nominal + self.ability.bonus + (self.ability.perma_bonus or 0)
+'''
+position = 'before'
+match_indent = true
+payload = '''
+if self.ability.effect == "Bonus Card" then
+    return self.base.nominal + self.ability.bonus + (G.GAME.reverse_upgrades.bonus*20) + (self.ability.perma_bonus or 0)
+end
+'''
 
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''localize\{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = \{\(\(specific_vars and specific_vars.bonus_chips'''
+position = 'after'
+payload = '''+(G.GAME.reverse_upgrades.bonus*20)'''
 
-# Factor in reverse empress upgrades?
-# [[patches]]
-# [patches.regex]
-# target = "game.lua"
-# pattern = '''m_mult =    \{max = 500, order = 3, name = "Mult", set = "Enhanced", pos = \{x=2,y=1}, effect = "Mult Card", label = "Mult Card", config = \{mult = 4'''
-# position = 'at'
-# match_indent = true
-# payload = '''m_mult =    {max = 500, order = 3, name = "Mult", set = "Enhanced", pos = {x=2,y=1}, effect = "Mult Card", label = "Mult Card", config = {mult = G.GAME.dollars'''
+# Reverse chariot upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+        return self.ability.h_x_mult
+    end
+'''
+position = 'before'
+match_indent = true
+payload = '''
+        if self.ability.effect == "Steel Card" then
+            return self.ability.h_x_mult + (G.GAME.reverse_upgrades.steel*0.25)
+        end
+'''
 
-# [UNDER CONSTRUCTION] Patches to allow permanent extra mult, like that of permanent extra chips from sources like Hiker
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.effect == 'Steel Card' then loc_vars = \{'''
+position = 'after'
+payload = '''(G.GAME.reverse_upgrades.steel*0.25)+'''
 
-# [[patches]]
-# [patches.pattern]
-# target = "functions/common_events.lua"
-# pattern = '''
-#         if specific_vars.bonus_chips then
-#             localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {specific_vars.bonus_chips}}
-#         end
-# '''
-# position = "after"
-# match_indent = true
-# payload = '''
-# if specific_vars.bonus_mult then
-#     localize{type = 'other', key = 'card_extra_mult', nodes = desc_nodes, vars = {specific_vars.bonus_mult}}
-# end
-# '''
-# times = 1
+# Reverse justice upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+    if self.ability.x_mult <= 1 then return 0 end
+'''
+position = 'before'
+match_indent = true
+payload = '''
+        if self.ability.effect == "Glass Card" then
+            return self.ability.x_mult + (G.GAME.reverse_upgrades.glass*0.5)
+        end
+'''
 
-# [[patches]]
-# [patches.pattern]
-# target = "functions/common_events.lua"
-# pattern = '''
-#         if _c.name ~= 'Stone Card' and ((specific_vars and specific_vars.bonus_chips) or (cfg.bonus ~= 0 and cfg.bonus)) then
-#             localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {((specific_vars and specific_vars.bonus_chips) or cfg.bonus)}}
-#         end
-# '''
-# position = "after"
-# match_indent = true
-# payload = '''
-# if specific_vars and specific_vars.bonus_mult then
-#     localize{type = 'other', key = 'card_extra_mult', nodes = desc_nodes, vars = {specific_vars.bonus_mult}}
-# end
-# '''
-# times = 1
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.effect == 'Glass Card' then loc_vars = \{'''
+position = 'after'
+payload = '''(G.GAME.reverse_upgrades.glass*0.5)+'''
 
-# [[patches]]
-# [patches.pattern]
-# target = "card.lua"
-# pattern = '''
-#         loc_vars = { playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour,
-#                     nominal_chips = self.base.nominal > 0 and self.base.nominal or nil,
-#                     bonus_chips = (self.ability.bonus + (self.ability.perma_bonus or 0)) > 0 and (self.ability.bonus + (self.ability.perma_bonus or 0)) or nil,
-# '''
-# position = "after"
-# match_indent = true
-# payload = '''
-#         bonus_mult = (self.ability.perma_mult and self.ability.perma_mult > 0) and self.ability.perma_mult or nil,
-# '''
-# times = 1
+# Reverse devil upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+    if self.ability.h_dollars > 0 then
+        ret.h_dollars = self.ability.h_dollars
+'''
+position = 'after'
+match_indent = true
+payload = '''
+        if self.ability.effect == "Gold Card" then
+            ret.h_dollars = ret.h_dollars + (G.GAME.reverse_upgrades.gold*4)
+        end
+'''
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.effect == 'Gold Card' then loc_vars = \{'''
+position = 'after'
+payload = '''(G.GAME.reverse_upgrades.gold*4)+'''
+
+# Reverse tower upgrades
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+    if self.ability.effect == 'Stone Card' then
+        return self.ability.bonus + (self.ability.perma_bonus or 0)
+    end
+'''
+position = 'after'
+match_indent = true
+payload = '''
+    if self.ability.effect == 'Stone Card' then
+        return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone*30)
+    end
+'''
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''elseif _c.effect == 'Stone Card' then loc_vars = \{\(\(specific_vars and specific_vars.bonus_chips'''
+position = 'after'
+payload = '''+(G.GAME.reverse_upgrades.stone*30)'''
+
+# Reverse lovers upgrades (placeholder effect)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:get_chip_x_mult(context)
+    if self.debuff then return 0 end
+    if self.ability.set == 'Joker' then return 0 end
+'''
+position = 'after'
+match_indent = true
+payload = '''
+    if self.ability.effect == "Wild Card" then
+        return self.ability.x_mult + (G.GAME.reverse_upgrades.wild*0.5)
+    end
+'''

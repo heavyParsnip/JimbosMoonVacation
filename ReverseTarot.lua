@@ -40,7 +40,7 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 3,
+        cost = 5,
         consumeable = true,
     },
 
@@ -58,9 +58,18 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 3,
+        cost = 5,
         consumeable = true
     },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky,
+                G.GAME.probabilities.normal+G.GAME.reverse_upgrades.lucky+1
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
@@ -81,16 +90,25 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 3,
-        consumeable = true
+        cost = 5,
+        consumeable = true,
+        moons = 4
     },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.config.moons
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
     end,
 
     use = function(self, card, area, copier)
-        for i = 1, 4 do
+        for i = 1, self.config.moons do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after', 
                 delay = 0.4, 
@@ -116,6 +134,21 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 3, y = 0},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                4+(G.GAME.reverse_upgrades.mult*3),
+                7+(G.GAME.reverse_upgrades.mult*3)
+            }
+        }
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -133,12 +166,27 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 4, y = 0},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        reverses = 2
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.ability.reverses
+            }
+        }
+    end,
+
     can_use = function(self, card)
         if (#G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables) then return true end
     end,
 
     use = function(self, card, area, copier)
-        for i = 1, math.min(2, G.consumeables.config.card_limit - #G.consumeables.cards) do
+        for i = 1, math.min(self.ability.reverses, G.consumeables.config.card_limit - #G.consumeables.cards) do
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after', 
@@ -154,6 +202,7 @@ SMODS.Consumable{
                 }))
             end
         end
+        delay(0.6)
     end
 }
 
@@ -163,6 +212,21 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 5, y = 0},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                30+(G.GAME.reverse_upgrades.bonus*20),
+                50+(G.GAME.reverse_upgrades.bonus*20)
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
@@ -182,6 +246,23 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 6, y = 0},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                -- G.GAME.reverse_upgrades.wild,
+                -- G.GAME.reverse_upgrades.wild+1
+                1.0+(G.GAME.reverse_upgrades.wild*0.5),
+                1.5+(G.GAME.reverse_upgrades.wild*0.5)
+            }
+        }
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -199,6 +280,21 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 7, y = 0},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                1.5+(G.GAME.reverse_upgrades.steel*0.25),
+                1.75+(G.GAME.reverse_upgrades.steel*0.25)
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
@@ -218,6 +314,21 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 8, y = 0},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                2+(G.GAME.reverse_upgrades.glass*0.75),
+                2.75+(G.GAME.reverse_upgrades.glass*0.75)
+            }
+        }
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -236,12 +347,52 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 9, y = 0},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
     can_use = function(self, card)
-        return true
+        return not not G.shop
     end,
 
     use = function(self, card, area, copier)
-        
+        local voucher_key = get_next_voucher_key()
+        G.shop_vouchers.config.card_limit = G.shop_vouchers.config.card_limit + 1
+        local voucher = Card(G.shop_vouchers.T.x + G.shop_vouchers.T.w/2, 
+        G.shop_vouchers.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[voucher_key],{bypass_discovery_center = true, bypass_discovery_ui = true})
+        voucher.cost = 0
+        create_shop_card_ui(voucher, 'Voucher', G.shop_vouchers)
+        voucher:start_materialize()     -- Ideally would want this played after the shop reappears
+        G.shop_vouchers:emplace(voucher)
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            delay = 0.4,
+            func = function()
+                card:juice_up(0.3, 0.5)
+                play_sound('timpani')
+                if G.GAME.dollars ~= 0 then
+                    ease_dollars(math.floor(-G.GAME.dollars/2), true)
+                else
+                    ease_dollars(0, true)
+                end
+                return true
+            end
+        }))
+
+        -- Any way to get this event to play after the consumeable animation ends and the shop reappers?
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                voucher:juice_up(0.3, 0.5)
+                play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                return true
+            end
+        }))
+        delay(0.6)
     end
 }
 
@@ -252,12 +403,80 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 0, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        chance = 4
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                G.GAME.probabilities.normal
+            }
+        }
+    end,
+
     can_use = function(self, card)
-        return true
+        for k, v in pairs(G.jokers.cards) do
+           if v.ability.set == 'Joker' and (not v.edition) then return true end
+        end
     end,
 
     use = function(self, card, area, copier)
-        
+        if pseudorandom('reverse_wheel_of_fortune') < G.GAME.probabilities.normal / card.ability.chance then
+            local joker_pool = {}
+            for k, v in pairs(G.jokers.cards) do
+                if v.ability.set == 'Joker' and (not v.edition) then
+                    table.insert(joker_pool, v)
+                end
+            end
+
+            local chosen_joker = pseudorandom_element(joker_pool, pseudoseed('reverse_wheel_of_fortune'))
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    set_edition_pn(chosen_joker)
+                    chosen_joker:juice_up(0.3, 0.5)
+                    card:juice_up(0.3, 0.5)
+                    return true
+                end
+            }))
+            delay(0.6)  -- Match the animation spacing of the original Wheel of Fortune
+        else
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    attention_text({
+                        text = localize('k_nuhuh'),
+                        colour = G.C.WHITE,
+                        backdrop_colour = G.C.REVERSE,
+                        scale = 1.3, 
+                        hold = 1.4,
+                        major = card,
+                        align = 'cm',
+                        })
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after', 
+                        delay = 0.06*G.SETTINGS.GAMESPEED, 
+                        blockable = false, 
+                        blocking = false, 
+                        func = function()
+                            play_sound('tarot2', 0.76, 0.4);
+                            return true
+                        end
+                    }))
+                    play_sound('tarot2', 1, 0.4)
+                    card:juice_up(0.3, 0.5)
+                    return true
+                end
+            }))
+            delay(0.6)  -- Match the animation spacing of the original Wheel of Fortune
+        end
+
     end
 }
 
@@ -268,12 +487,82 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 1, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        max_highlighted = 4
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.ability.max_highlighted
+            }
+        }
+    end,
+
     can_use = function(self, card)
-        return true
+        return #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end,
 
     use = function(self, card, area, copier)
-        
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i=1, #G.hand.highlighted do
+            local percent = 0.85 + (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('card1', percent);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        delay(0.2)
+        for i=1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()   -- hmm....
+                    if(G.hand.highlighted[i].base.id == 14) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, 'King')
+                    elseif(G.hand.highlighted[i].base.id == 13) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, 'Queen')
+                    elseif(G.hand.highlighted[i].base.id == 12) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, 'Jack')
+                    elseif(G.hand.highlighted[i].base.id == 11) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '10')
+                    elseif(G.hand.highlighted[i].base.id == 10) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '9')
+                    elseif(G.hand.highlighted[i].base.id == 9) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '8')
+                    elseif(G.hand.highlighted[i].base.id == 8) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '7')
+                    elseif(G.hand.highlighted[i].base.id == 7) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '6')
+                    elseif(G.hand.highlighted[i].base.id == 6) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '5')
+                    elseif(G.hand.highlighted[i].base.id == 5) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '4')
+                    elseif(G.hand.highlighted[i].base.id == 4) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '3')
+                    elseif(G.hand.highlighted[i].base.id == 3) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, '2')
+                    elseif(G.hand.highlighted[i].base.id == 2) then
+                        SMODS.change_base(G.hand.highlighted[i], nil, 'Ace')
+                    end
+                    return true
+                end
+            }))
+        end
+        for i=1, #G.hand.highlighted do
+            local percent = 0.85 + (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('tarot2', percent, 0.6);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2,func = function() G.hand:unhighlight_all(); return true end }))
+        delay(0.5)
     end
 }
 
@@ -284,12 +573,58 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 2, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        max_highlighted = 5
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.ability.max_highlighted
+            }
+        }
+    end,
+
     can_use = function(self, card)
-        return true
+        return #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end,
 
     use = function(self, card, area, copier)
-        
+        local destroyed_cards = {}
+        for i=#G.hand.highlighted, 1, -1 do
+            destroyed_cards[#destroyed_cards+1] = G.hand.highlighted[i]
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                for i=#G.hand.highlighted, 1, -1 do
+                    local to_destroy = G.hand.highlighted[i]
+                    if to_destroy.ability.name == 'Glass Card' then 
+                        to_destroy:shatter()
+                    else
+                        to_destroy:start_dissolve(nil, i == #G.hand.highlighted)
+                    end
+                end
+                return true
+            end
+        }))
+        delay(0.3)
+        for i = 1, #G.jokers.cards do
+            G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = destroyed_cards})
+        end
     end
 }
 
@@ -299,6 +634,21 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 3, y = 1},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        max_highlighted = 2
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.ability.max_highlighted
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
@@ -316,12 +666,56 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 4, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true,
+        penalty_per_spectral = 3,
+        money_penalty = 0,
+        max_penalty = 50
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                self.ability.penalty_per_spectral,
+                self.ability.max_penalty,
+                self.ability.money_penalty
+            }
+        }
+    end,
+
     can_use = function(self, card)
-        return true
+        if (#G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables) then return true end
     end,
 
     use = function(self, card, area, copier)
         
+
+        local spectrals_used = 0
+        for k, v in pairs(G.GAME.consumeable_usage) do
+            if v.set == 'Spectral' then spectrals_used = spectrals_used + 1 end
+        end
+
+
+        for i = 1, G.consumeables.config.card_limit - #G.consumeables.cards do
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after', 
+                    delay = 0.4, 
+                    func = function()
+                        play_sound('timpani')
+                        local new_card = SMODS.create_card{set = "Spectral", area = G.consumeables}
+                        new_card:add_to_deck()
+                        G.consumeables:emplace(new_card)
+                        card:juice_up(0.3, 0.5)
+                        return true 
+                    end
+                }))
+            end
+        end
+        
+        self.ability.money_penalty = spectrals_used*3
     end
 }
 
@@ -331,6 +725,21 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 5, y = 1},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                3+(G.GAME.reverse_upgrades.gold*4),
+                7+(G.GAME.reverse_upgrades.gold*4)
+            }
+        }
+    end,
 
     can_use = function(self, card)
         return true
@@ -350,6 +759,21 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 6, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                50+(G.GAME.reverse_upgrades.stone*30),
+                80+(G.GAME.reverse_upgrades.stone*30)
+            }
+        }
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -368,12 +792,18 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 7, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
     can_use = function(self, card)
         return true
     end,
 
     use = function(self, card, area, copier)
-        
+        delay(0.3)
     end
 }
 
@@ -383,6 +813,12 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 8, y = 1},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
 
     can_use = function(self, card)
         return true
@@ -400,6 +836,12 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 9, y = 1},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
     can_use = function(self, card)
         return true
     end,
@@ -416,6 +858,12 @@ SMODS.Consumable{
     atlas = 'reverse',
     pos = {x = 0, y = 2},
 
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
+
     can_use = function(self, card)
         return true
     end,
@@ -431,6 +879,12 @@ SMODS.Consumable{
     set = 'Reverse',
     atlas = 'reverse',
     pos = {x = 1, y = 2},
+
+    config = {
+        discovered = false,
+        cost = 5,
+        consumeable = true
+    },
 
     can_use = function(self, card)
         return true
@@ -459,4 +913,16 @@ function reverse_kaboom(card)
             return true
         end
     }))
+end
+
+-- For reverse wheel of fortune. Sets the given joker to Polychrome (70%) or Negative (30%)
+function set_edition_pn(joker)
+    local edition_poll = pseudorandom(pseudoseed('reverse_wheel_of_fortune'))
+    if edition_poll > 0.7 then 
+        joker:set_edition({negative = true}, true)
+        return true
+    elseif edition_poll > 0 then
+        joker:set_edition({polychrome = true}, true)
+        return true
+    end
 end

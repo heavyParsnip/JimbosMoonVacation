@@ -17,15 +17,15 @@ return {
                 name = "naicigaM ehT",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Lucky Cards{}",
-                    "{C:green}probability{} by {C:attention}1{}",
-                    "{s:0.8}ex: {C:green}1 in 5{} -> {C:green}2 in 5{}{}"
+                    "{C:green}probability{} by {C:attention}+1{}",
+                    "{s:0.8}{C:inactive}({}{C:green}#1# in 5{} {C:inactive}->{} {C:green}#2# in 5{}{C:inactive}){}{}"
                 }
             },
             -- II
             c_moon_reversehighpriestess = {
                 name = "ssetseirP hgiH ehT",
                 text = {
-                    "Creates up to {C:attention}4{}",
+                    "Creates up to {C:attention}#1#{}",
                     "random {C:dark_edition}Negative",
                     "{C:lunar}Lunar{} cards"
                 }
@@ -35,14 +35,15 @@ return {
                 name = "sserpmE ehT",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Mult Card{}",
-                    "bonus by {C:mult}+3{} Mult"
+                    "bonus by {C:mult}+3{} Mult",
+                    "{s:0.8}{C:inactive}({}{C:mult}+#1# {}{C:inactive}Mult -> {}{C:mult}+#2#{}{C:inactive} Mult){}"
                 }
             },
             -- IV
             c_moon_reverseemperor = {
                 name = "rorepmE ehT",
                 text = {
-                    "Creates up to {C:attention}2{} random",
+                    "Creates up to {C:attention}#1#{} random",
                     "{C:reverse}Reverse Tarot{} cards",
                     "{C:inactive}(Must have room){}"
                 }
@@ -53,15 +54,22 @@ return {
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Bonus Card{}",
                     "bonus by {C:chips}+20{}",
+                    "{s:0.8}{C:inactive}({}{C:chips}+#1# {}{C:inactive}Chips -> {}{C:chips}+#2#{}{C:inactive} Chips){}"
                 }
             },
             -- VI
             c_moon_reverselovers = {
                 name = "srevoL ehT",
                 text = {
-                    "{C:attention}Wild Cards{} retrigger",
-                    "suit-based {C:attention}Jokers{}",
-                    "{C:green}+1{} time."
+                    -- Need to figure out how to implement this eleganty
+                    -- "{C:attention}Wild Cards{} retrigger when",
+                    -- "scored {C:green}+1{} time.",
+                    -- "{s:0.8}{C:inactive}({}{C:green}#1#{}{C:inactive} -> {}{C:green}#2#{}{C:inactive} times){}"
+                    
+                    -- For now, using this effect as a placeholder
+                    "{C:dark_edition}Upgrades{} {C:attention}Wild Cards{} to",
+                    "give {X:mult,C:white} X1.5 {} Mult when scored",
+                    "{s:0.8}{C:inactive}({}{X:mult,C:white} X#1# {}{C:inactive} Mult -> {}{X:mult,C:white} X#2# {}{C:inactive} Mult){}"
                 }
             },
             -- VII
@@ -69,7 +77,8 @@ return {
                 name = "toirahC ehT",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Steel Card{}",
-                    "bonus by {X:mult,C:white}X0.25{} Mult"
+                    "bonus by {X:mult,C:white}X0.25{} Mult",
+                    "{s:0.8}{C:inactive}({}{X:mult,C:white} X#1# {}{C:inactive} Mult -> {}{X:mult,C:white} X#2# {}{C:inactive} Mult){}"
                 }
             },
             -- VIII
@@ -77,22 +86,24 @@ return {
                 name = "ecitsuJ",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Glass Card{}",
-                    "bonus by {X:mult,C:white}X0.5{} Mult",
+                    "bonus by {X:mult,C:white} X0.75 {} Mult",
+                    "{s:0.8}{C:inactive}({}{X:mult,C:white} X#1# {}{C:inactive} Mult -> {}{X:mult,C:white} X#2# {}{C:inactive} Mult){}"
                 }
             },
             -- IX
             c_moon_reversehermit = {
                 name = "timreH ehT",
                 text = {
-                    "Halves money and grants",
-                    "a random Voucher"
+                    "Halves money and adds",
+                    "a free Voucher to",
+                    "the current {C:attention}shop{}"
                 }
             },
             -- X
             c_moon_reversewheeloffortune = {
                 name = "enutroF fo leehW ehT",
                 text = {
-                    "{C:green}1 in 4{} chance to add",
+                    "{C:green}#1# in 4{} chance to add",
                     "{C:dark_edition}Polychrome{} or {C:dark_edition}Negative{} edition",
                     "to a random {C:attention}Joker{}"
                 }
@@ -102,7 +113,7 @@ return {
                 name = "htgnertS",
                 text = {
                     "Decreses rank of",
-                    "up to {C:attention}4{} selected",
+                    "up to {C:attention}#1#{} selected",
                     "cards by {C:attention}1{}"
                 }
             },
@@ -111,14 +122,14 @@ return {
                 name = "naM degnaH ehT",
                 text = {
                     "Destroys up to",
-                    "{C:attention}5{} selected cards"
+                    "{C:attention}#1#{} selected cards"
                 }
             },
             -- XIII
             c_moon_reversedeath = {
                 name = "htaeD",
                 text = {
-                    "Select {C:attention}2{} cards. Apply",
+                    "Select {C:attention}#1#{} cards. Apply",
                     "all {C:attention}Enhancements{}, {C:spectral}Seals{}, and ",
                     "{C:dark_edition}Editions{} from the {C:attention}right{} card",
                     "to the {C:attention}left{} card",
@@ -129,9 +140,10 @@ return {
             c_moon_reversetemperance = {
                 name = "ecnarepmeT",
                 text = {
-                    "Gives {C:money}$3{} for each card added",
-                    "to your full deck {C:inactive}(Max of{} {C:money}$50{}{C:inactive}){}",
-                    "{C:inactive}(Currently {}{C:money}$0{}{C:inactive}){}"
+                    "Lose {C:money}#1#{} per {C:Spectral}Spectral{} card",
+                    "used this run, then fill your consumable",
+                    "area with {C:Spectral}Spectral{} cards",
+                    "{C:inactive}(Max of{} {C:money}-$#2#{}{C:inactive}) (Currently {}{C:money}$#3#{}{C:inactive}){}"
                 }
             },
             -- XV
@@ -139,7 +151,8 @@ return {
                 name = "liveD ehT",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Gold Card{}",
-                    "bonus by {C:money}$4{}"
+                    "bonus by {C:money}$4{}",
+                    "{s:0.8}{C:inactive}({}{C:money}$#1#{}{C:inactive} -> {}{C:money}$#2#{}{C:inactive}){}"
                 }
             },
             -- XVI
@@ -147,7 +160,8 @@ return {
                 name = "rewoT ehT",
                 text = {
                     "{C:dark_edition}Upgrades{} {C:attention}Stone Card{}",
-                    "base value by {C:chips}+30{} Chips"
+                    "base value by {C:chips}+30{} Chips",
+                    "{s:0.8}{C:inactive}({}{C:chips}+#1# {}{C:inactive}Chips -> {}{C:chips}+#2#{}{C:inactive} Chips){}"
                 }
             },
             -- XVII
@@ -328,7 +342,7 @@ return {
     },
     misc = {
         dictionary = {
-            nuhuh = "Nuh-uh!"
+            k_nuhuh = "Nuh-uh!"
         }
     }
 }
