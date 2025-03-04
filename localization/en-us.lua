@@ -140,9 +140,9 @@ return {
             c_moon_reversetemperance = {
                 name = "ecnarepmeT",
                 text = {
-                    "Lose {C:money}#1#{} per {C:Spectral}Spectral{} card",
-                    "used this run, then fill your consumable",
-                    "area with {C:Spectral}Spectral{} cards",
+                    "Lose {C:money}$#1#{} per {C:spectral}Spectral{} card used",
+                    "this run, then fill your consumable",
+                    "area with {C:spectral}Spectral{} cards",
                     "{C:inactive}(Max of{} {C:money}-$#2#{}{C:inactive}) (Currently {}{C:money}$#3#{}{C:inactive}){}"
                 }
             },

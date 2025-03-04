@@ -176,7 +176,7 @@ SMODS.Consumable{
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                self.ability.reverses
+                center.ability.reverses
             }
         }
     end,
@@ -186,7 +186,7 @@ SMODS.Consumable{
     end,
 
     use = function(self, card, area, copier)
-        for i = 1, math.min(self.ability.reverses, G.consumeables.config.card_limit - #G.consumeables.cards) do
+        for i = 1, math.min(card.ability.reverses, G.consumeables.config.card_limit - #G.consumeables.cards) do
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after', 
@@ -392,7 +392,7 @@ SMODS.Consumable{
                 return true
             end
         }))
-        delay(0.6)
+        -- delay(0.6)
     end
 }
 
@@ -497,7 +497,7 @@ SMODS.Consumable{
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                self.ability.max_highlighted
+                center.ability.max_highlighted
             }
         }
     end,
@@ -583,7 +583,7 @@ SMODS.Consumable{
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                self.ability.max_highlighted
+                center.ability.max_highlighted
             }
         }
     end,
@@ -639,23 +639,61 @@ SMODS.Consumable{
         discovered = false,
         cost = 5,
         consumeable = true,
-        max_highlighted = 2
+        need_highlighted = 2
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                self.ability.max_highlighted
+                center.ability.need_highlighted
             }
         }
     end,
 
     can_use = function(self, card)
-        return true
+        return #G.hand.highlighted == card.ability.need_highlighted
     end,
 
     use = function(self, card, area, copier)
-        
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        for i=1, #G.hand.highlighted do
+            local percent = 1.15 - (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('card1', percent);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        delay(0.2)
+        local rightmost = G.hand.highlighted[1]
+        for i=1, #G.hand.highlighted do
+            if G.hand.highlighted[i].T.x > rightmost.T.x then rightmost = G.hand.highlighted[i] end 
+        end
+        for i=1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    if G.hand.highlighted[i] ~= rightmost then
+                        old_rank = G.hand.highlighted[i].base.value
+                        old_suit = G.hand.highlighted[i].base.old_suit
+                        copy_card(rightmost, G.hand.highlighted[i])
+                        SMODS.change_base(G.hand.highlighted[i], old_suit, old_rank)
+                    end
+                    return true
+                end
+            }))
+        end
+        for i=1, #G.hand.highlighted do
+            local percent = 0.85 + (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('tarot2', percent, 0.6);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2,func = function() G.hand:unhighlight_all(); return true end }))
+        delay(0.5)
     end
 }
 
@@ -670,17 +708,17 @@ SMODS.Consumable{
         discovered = false,
         cost = 5,
         consumeable = true,
-        penalty_per_spectral = 3,
+        penalty_per_spectral = 2,
         money_penalty = 0,
-        max_penalty = 50
+        max_penalty = 30
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                self.ability.penalty_per_spectral,
-                self.ability.max_penalty,
-                self.ability.money_penalty
+                center.ability.penalty_per_spectral,
+                center.ability.max_penalty,
+                center.ability.money_penalty
             }
         }
     end,
@@ -690,14 +728,12 @@ SMODS.Consumable{
     end,
 
     use = function(self, card, area, copier)
-        
-
         local spectrals_used = 0
         for k, v in pairs(G.GAME.consumeable_usage) do
             if v.set == 'Spectral' then spectrals_used = spectrals_used + 1 end
         end
-
-
+        self.config.money_penalty = spectrals_used*2
+        
         for i = 1, G.consumeables.config.card_limit - #G.consumeables.cards do
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                 G.E_MANAGER:add_event(Event({
@@ -709,13 +745,13 @@ SMODS.Consumable{
                         new_card:add_to_deck()
                         G.consumeables:emplace(new_card)
                         card:juice_up(0.3, 0.5)
+                        ease_dollars(-(math.min(self.config.money_penalty, card.ability.max_penalty)), true)
                         return true 
                     end
                 }))
             end
         end
-        
-        self.ability.money_penalty = spectrals_used*3
+        delay(0.6)
     end
 }
 
@@ -799,10 +835,50 @@ SMODS.Consumable{
     },
 
     can_use = function(self, card)
-        return true
+        local has_diamonds = false
+        
+        if G.hand and G.hand.cards then
+            for k, v in ipairs(G.hand.cards) do
+                if v:is_suit("Diamonds") and v.ability.effect ~= "Stone Card" then
+                    has_diamonds = true
+                end
+            end
+        end
+        return has_diamonds
     end,
 
     use = function(self, card, area, copier)
+        local destroyed_cards = {}
+
+        for i = #G.hand.cards, 1, -1 do
+            if G.hand.cards[i]:is_suit("Diamonds") and G.hand.cards[i].ability.effect ~= "Stone Card" then
+                destroyed_cards[#destroyed_cards+1] = G.hand.cards[i]
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                for i=#destroyed_cards, 1, -1 do
+                    local to_destroy = destroyed_cards[i]
+                    if to_destroy.ability.name == 'Glass Card' then 
+                        to_destroy:shatter()
+                    else
+                        to_destroy:start_dissolve(nil, i == #destroyed_cards)
+                    end
+                end
+                return true
+            end
+        }))
         delay(0.3)
     end
 }
@@ -821,11 +897,51 @@ SMODS.Consumable{
     },
 
     can_use = function(self, card)
-        return true
+        local has_clubs = false
+        
+        if G.hand and G.hand.cards then
+            for k, v in ipairs(G.hand.cards) do
+                if v:is_suit("Clubs") and v.ability.effect ~= "Stone Card" then
+                    has_clubs = true
+                end
+            end
+        end
+        return has_clubs
     end,
 
     use = function(self, card, area, copier)
-        
+        local destroyed_cards = {}
+
+        for i = #G.hand.cards, 1, -1 do
+            if G.hand.cards[i]:is_suit("Clubs") and G.hand.cards[i].ability.effect ~= "Stone Card" then
+                destroyed_cards[#destroyed_cards+1] = G.hand.cards[i]
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                for i=#destroyed_cards, 1, -1 do
+                    local to_destroy = destroyed_cards[i]
+                    if to_destroy.ability.name == 'Glass Card' then 
+                        to_destroy:shatter()
+                    else
+                        to_destroy:start_dissolve(nil, i == #destroyed_cards)
+                    end
+                end
+                return true
+            end
+        }))
+        delay(0.3)
     end
 }
 
@@ -843,11 +959,51 @@ SMODS.Consumable{
     },
 
     can_use = function(self, card)
-        return true
+        local has_hearts = false
+        
+        if G.hand and G.hand.cards then
+            for k, v in ipairs(G.hand.cards) do
+                if v:is_suit("Hearts") and v.ability.effect ~= "Stone Card" then
+                    has_hearts = true
+                end
+            end
+        end
+        return has_hearts
     end,
 
     use = function(self, card, area, copier)
-        
+        local destroyed_cards = {}
+
+        for i = #G.hand.cards, 1, -1 do
+            if G.hand.cards[i]:is_suit("Hearts") and G.hand.cards[i].ability.effect ~= "Stone Card" then
+                destroyed_cards[#destroyed_cards+1] = G.hand.cards[i]
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                for i=#destroyed_cards, 1, -1 do
+                    local to_destroy = destroyed_cards[i]
+                    if to_destroy.ability.name == 'Glass Card' then 
+                        to_destroy:shatter()
+                    else
+                        to_destroy:start_dissolve(nil, i == #destroyed_cards)
+                    end
+                end
+                return true
+            end
+        }))
+        delay(0.3)
     end
 }
 
@@ -887,11 +1043,51 @@ SMODS.Consumable{
     },
 
     can_use = function(self, card)
-        return true
+        local has_spades = false
+        
+        if G.hand and G.hand.cards then
+            for k, v in ipairs(G.hand.cards) do
+                if v:is_suit("Spades") and v.ability.effect ~= "Stone Card" then
+                    has_spades = true
+                end
+            end
+        end
+        return has_spades
     end,
 
     use = function(self, card, area, copier)
-        
+        local destroyed_cards = {}
+
+        for i = #G.hand.cards, 1, -1 do
+            if G.hand.cards[i]:is_suit("Spades") and G.hand.cards[i].ability.effect ~= "Stone Card" then
+                destroyed_cards[#destroyed_cards+1] = G.hand.cards[i]
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                for i=#destroyed_cards, 1, -1 do
+                    local to_destroy = destroyed_cards[i]
+                    if to_destroy.ability.name == 'Glass Card' then 
+                        to_destroy:shatter()
+                    else
+                        to_destroy:start_dissolve(nil, i == #destroyed_cards)
+                    end
+                end
+                return true
+            end
+        }))
+        delay(0.3)
     end
 }
 

@@ -193,16 +193,12 @@ payload = '''(G.GAME.reverse_upgrades.gold*4)+'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-    if self.ability.effect == 'Stone Card' then
         return self.ability.bonus + (self.ability.perma_bonus or 0)
-    end
 '''
-position = 'after'
+position = 'at'
 match_indent = true
 payload = '''
-    if self.ability.effect == 'Stone Card' then
         return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone*30)
-    end
 '''
 
 [[patches]]
