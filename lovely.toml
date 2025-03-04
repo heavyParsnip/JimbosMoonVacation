@@ -51,7 +51,41 @@ payload = '''
 '''
 times = 1
 
-# Factor in reverse magician upgrades & show in UI
+# Reverse fool
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "last_tarot_planet = nil,"
+position = 'after'
+match_indent = true
+payload = "last_reverse_lunar_spectral = nil,"
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' then "
+position = 'before'
+match_indent = true
+payload = '''
+    if card.config.center.set == 'Reverse' or card.config.center.set == 'Lunar' or card.config.center.set == 'Spectral' then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        G.GAME.last_reverse_lunar_spectral = card.config.center_key
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
+    end
+'''
+
+
+# Factor magician upgrades
 [[patches]]
 [patches.pattern]
 target = "card.lua"

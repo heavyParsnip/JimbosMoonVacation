@@ -44,9 +44,45 @@ SMODS.Consumable{
         consumeable = true,
     },
 
-    -- loc_vars = function(self,info_queue,center)
-        -- return {vars = {center.ability.extra.cards}}
-    -- end,
+    loc_vars = function(self,info_queue,center)
+        local rfool_c = G.GAME.last_reverse_lunar_spectral and G.P_CENTERS[G.GAME.last_reverse_lunar_spectral] or nil
+        local last_rls = rfool_c and localize{type = 'name_text', key = rfool_c.key, set = rfool_c.set} or localize('k_none')
+        local colour = (not rfool_c or rfool_c.name == 'c_moon_reversefool') and G.C.RED or G.C.GREEN
+        main_end = {
+            {n=G.UIT.C, config={align = "bm", padding = 0.02}, nodes={
+                {n=G.UIT.C, config={align = "m", colour = colour, r = 0.05, padding = 0.05}, nodes={
+                    {n=G.UIT.T, config={text = ' '..last_rls..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}},
+                }}
+            }}
+        }
+        if not (not rfool_c or rfool_c.name == 'c_moon_reversefool') then
+            info_queue[#info_queue+1] = rfool_c
+        end
+        return { main_end = main_end }
+    end,
+
+    can_use = function(self, card)
+        if (#G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables) 
+            and G.GAME.last_reverse_lunar_spectral and G.GAME.last_reverse_lunar_spectral ~= "c_moon_reversefool" then return true end
+    end,
+
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after', 
+            delay = 0.4, 
+            func = function()
+                if G.consumeables.config.card_limit > #G.consumeables.cards then
+                    play_sound('timpani')
+                    local new_card = create_card(nil, G.consumeables, nil, nil, nil, nil, G.GAME.last_reverse_lunar_spectral, 'rfool')
+                    new_card:add_to_deck()
+                    G.consumeables:emplace(new_card)
+                    card:juice_up(0.3, 0.5)
+                end
+                return true 
+            end 
+        }))
+        delay(0.6)
+    end
 }
 
 -- Reverse Magician
@@ -1017,15 +1053,67 @@ SMODS.Consumable{
     config = {
         discovered = false,
         cost = 5,
-        consumeable = true
+        consumeable = true,
+        max_highlighted = 1
     },
 
     can_use = function(self, card)
-        return true
+        return #G.jokers.highlighted == card.ability.max_highlighted
     end,
 
     use = function(self, card, area, copier)
-        
+        stop_use()
+        local make_legendary = false
+        local old_joker = G.jokers.highlighted[1]
+        local old_rarity = old_joker.config.center.rarity
+        local new_rarity = 1
+
+        if old_rarity == 1 then
+            new_rarity = 0.9
+        elseif old_rarity == 2 then
+            new_rarity = 1
+        elseif old_rarity >= 3 then
+            make_legendary = true
+            new_rarity = 4
+        end
+
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function() 
+                local to_destroy = G.jokers.highlighted[1]
+                if to_destroy.ability.name == 'Glass Joker' then    -- Just for fun
+                    to_destroy:shatter()
+                else
+                    to_destroy:start_dissolve(nil, 1)
+                end
+                return true
+            end
+        }))
+        delay(0.4)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                local new_joker = create_card('Joker', G.jokers, make_legendary, new_rarity, nil, nil, nil, 'rjud')
+                new_joker:add_to_deck()
+                G.jokers:emplace(new_joker)
+                card:juice_up(0.3, 0.5)
+                return true
+            end 
+        }))
+        delay(0.6)
     end
 }
 
