@@ -40,7 +40,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
     },
 
@@ -94,7 +95,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -126,7 +128,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         moons = 4
     },
@@ -172,7 +175,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -204,7 +208,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         reverses = 2
     },
@@ -251,7 +256,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -284,7 +290,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -319,7 +326,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -352,7 +360,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -385,7 +394,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -441,7 +451,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         chance = 4
     },
@@ -525,7 +536,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         max_highlighted = 4
     },
@@ -611,7 +623,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         max_highlighted = 5
     },
@@ -673,7 +686,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         need_highlighted = 2
     },
@@ -742,7 +756,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         penalty_per_spectral = 2,
         money_penalty = 0,
@@ -800,15 +815,16 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                3+(G.GAME.reverse_upgrades.gold*4),
-                7+(G.GAME.reverse_upgrades.gold*4)
+                3+(G.GAME.reverse_upgrades.gold*2),
+                5+(G.GAME.reverse_upgrades.gold*2)
             }
         }
     end,
@@ -833,7 +849,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -866,7 +883,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -928,7 +946,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -990,7 +1009,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 
@@ -1052,7 +1072,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true,
         max_highlighted = 1
     },
@@ -1126,7 +1147,8 @@ SMODS.Consumable{
 
     config = {
         discovered = false,
-        cost = 5,
+        cost = 4,
+        extra_value = 1,
         consumeable = true
     },
 

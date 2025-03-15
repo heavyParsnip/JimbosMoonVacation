@@ -1,7 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 0
+priority = 10
 
 # Add new colors for Reverse and Lunar cards
 [[patches]]
@@ -11,8 +11,9 @@ pattern = "RENTAL = HEX('b18f43'),"
 position = 'after'
 match_indent = true
 payload = '''
-    REVERSE = HEX('a61a20'),
-    LUNAR = HEX('5b5f8b'),
+REVERSE = HEX('a61a20'),
+LUNAR = HEX('5b5f8b'),
+LUNARALT = HEX('7478a4'),
 '''
 
 [[patches]]
@@ -22,10 +23,11 @@ pattern = "legendary = G.C.RARITY[4],"
 position = 'after'
 match_indent = true
 payload = '''
-    reverse = G.C.REVERSE,
-    lunar = G.C.LUNAR,
+reverse = G.C.REVERSE,
+lunar = G.C.LUNAR,
+lunaralt = G.C.LUNARALT,
 '''
-
+### REVERSE TAROT CARDS ###
 # Add reverse tarot upgrade tracking
 [[patches]]
 [patches.pattern]
@@ -38,16 +40,16 @@ pattern = '''
 position = 'after'
 match_indent = true
 payload = '''
-        reverse_upgrades = {
-            lucky = 0,
-            mult = 0,
-            bonus = 0,
-            wild = 0,
-            steel = 0,
-            glass = 0,
-            gold = 0,
-            stone = 0,
-        },
+reverse_upgrades = {
+    lucky = 0,
+    mult = 0,
+    bonus = 0,
+    wild = 0,
+    steel = 0,
+    glass = 0,
+    gold = 0,
+    stone = 0,
+},
 '''
 times = 1
 
@@ -67,21 +69,21 @@ pattern = "if card.config.center.set == 'Tarot' or card.config.center.set == 'Pl
 position = 'before'
 match_indent = true
 payload = '''
-    if card.config.center.set == 'Reverse' or card.config.center.set == 'Lunar' or card.config.center.set == 'Spectral' then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'immediate',
-            func = function()
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    func = function()
-                        G.GAME.last_reverse_lunar_spectral = card.config.center_key
-                        return true
-                    end
-                }))
-                return true
-            end
-        }))
-    end
+if card.config.center.set == 'Reverse' or card.config.center.set == 'Lunar' or card.config.center.set == 'Spectral' then
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    G.GAME.last_reverse_lunar_spectral = card.config.center_key
+                    return true
+                end
+            }))
+            return true
+        end
+    }))
+end
 '''
 
 
@@ -114,23 +116,24 @@ payload = '''+G.GAME.reverse_upgrades.lucky'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-        return self.ability.mult
+    if self.ability.effect == "Mult Card" then
+        ret = ret + self.ability.mult
     end
 '''
-position = 'before'
+position = 'at'
 match_indent = true
 payload = '''
-        if self.ability.effect == "Mult Card" then
-            return self.ability.mult + (G.GAME.reverse_upgrades.mult*3)
-        end
+if self.ability.effect == "Mult Card" then
+    ret = ret + self.ability.mult + (G.GAME.reverse_upgrades.mult*3)
+end
 '''
 
 [[patches]]
 [patches.regex]
 target = "functions/common_events.lua"
-pattern = '''if _c.effect == 'Mult Card' then loc_vars = \{'''
+pattern = '''if _c.effect == 'Mult Card' then loc_vars = \{SMODS.signed\(cfg.mult'''
 position = 'after'
-payload = '''(G.GAME.reverse_upgrades.mult*3)+'''
+payload = ''' + (G.GAME.reverse_upgrades.mult*3)'''
 
 # Reverse hierophant upgrades
 [[patches]]
@@ -150,7 +153,7 @@ end
 [[patches]]
 [patches.regex]
 target = "functions/common_events.lua"
-pattern = '''localize\{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = \{\(\(specific_vars and specific_vars.bonus_chips'''
+pattern = '''localize\{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = \{SMODS.signed\(\(specific_vars and specific_vars.bonus_chips'''
 position = 'after'
 payload = '''+(G.GAME.reverse_upgrades.bonus*20)'''
 
@@ -158,16 +161,13 @@ payload = '''+(G.GAME.reverse_upgrades.bonus*20)'''
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-        return self.ability.h_x_mult
-    end
-'''
-position = 'before'
+pattern = "local ret = SMODS.multiplicative_stacking(self.ability.h_x_mult or 1, self.ability.perma_h_x_mult or 0)"
+position = 'after'
 match_indent = true
 payload = '''
-        if self.ability.effect == "Steel Card" then
-            return self.ability.h_x_mult + (G.GAME.reverse_upgrades.steel*0.25)
-        end
+if self.ability.effect == "Steel Card" then
+    ret = ret + (G.GAME.reverse_upgrades.steel*0.25)
+end
 '''
 
 [[patches]]
@@ -181,15 +181,13 @@ payload = '''(G.GAME.reverse_upgrades.steel*0.25)+'''
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-    if self.ability.x_mult <= 1 then return 0 end
-'''
-position = 'before'
+pattern = '''local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)'''
+position = 'after'
 match_indent = true
 payload = '''
-        if self.ability.effect == "Glass Card" then
-            return self.ability.x_mult + (G.GAME.reverse_upgrades.glass*0.5)
-        end
+if self.ability.effect == "Glass Card" then 
+    ret = ret + (G.GAME.reverse_upgrades.glass*0.5)
+end
 '''
 
 [[patches]]
@@ -204,23 +202,23 @@ payload = '''(G.GAME.reverse_upgrades.glass*0.5)+'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-    if self.ability.h_dollars > 0 then
-        ret.h_dollars = self.ability.h_dollars
+    local ret = (self.ability.h_dollars or 0) + (self.ability.perma_h_dollars or 0)
 '''
 position = 'after'
 match_indent = true
 payload = '''
-        if self.ability.effect == "Gold Card" then
-            ret.h_dollars = ret.h_dollars + (G.GAME.reverse_upgrades.gold*4)
-        end
+if self.ability.effect == "Gold Card" then
+    ret = ret + (G.GAME.reverse_upgrades.gold*2)
+end
 '''
 
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = "functions/common_events.lua"
-pattern = '''elseif _c.effect == 'Gold Card' then loc_vars = \{'''
-position = 'after'
-payload = '''(G.GAME.reverse_upgrades.gold*4)+'''
+pattern = '''elseif _c.effect == 'Gold Card' then loc_vars = {specific_vars and SMODS.signed_dollars(specific_vars.total_h_dollars) or cfg.h_dollars and SMODS.signed_dollars(cfg.h_dollars) or 0}'''
+position = 'at'
+match_indent = true
+payload = '''elseif _c.effect == 'Gold Card' then loc_vars = {specific_vars and SMODS.signed_dollars(specific_vars.total_h_dollars) or cfg.h_dollars and SMODS.signed_dollars(cfg.h_dollars+(G.GAME.reverse_upgrades.gold*4)) or 0}'''
 
 # Reverse tower upgrades
 [[patches]]
@@ -232,13 +230,13 @@ pattern = '''
 position = 'at'
 match_indent = true
 payload = '''
-        return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone*30)
+return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone*30)
 '''
 
 [[patches]]
 [patches.regex]
 target = "functions/common_events.lua"
-pattern = '''elseif _c.effect == 'Stone Card' then loc_vars = \{\(\(specific_vars and specific_vars.bonus_chips'''
+pattern = '''elseif _c.effect == 'Stone Card' then loc_vars = \{\(\(specific_vars and SMODS.signed\(specific_vars.bonus_chips'''
 position = 'after'
 payload = '''+(G.GAME.reverse_upgrades.stone*30)'''
 
@@ -247,14 +245,90 @@ payload = '''+(G.GAME.reverse_upgrades.stone*30)'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-function Card:get_chip_x_mult(context)
-    if self.debuff then return 0 end
-    if self.ability.set == 'Joker' then return 0 end
+    local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)
 '''
 position = 'after'
 match_indent = true
 payload = '''
-    if self.ability.effect == "Wild Card" then
-        return self.ability.x_mult + (G.GAME.reverse_upgrades.wild*0.5)
-    end
+if self.ability.effect == "Wild Card" then
+    ret = ret + (G.GAME.reverse_upgrades.wild*0.75)
+end
+'''
+
+### LUNAR CARDS ###
+# Lunar upgrade tracking & triggering
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''hands = {'''
+position = 'before'
+match_indent = true
+payload = '''
+    lunar_upgrades = {
+        _2 = {name = "2", value = G.P_CARDS.H_2.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 2, l_chips = 5},
+        _3 = {name = "3", value = G.P_CARDS.H_3.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 2, l_chips = 5},
+        _4 = {name = "4", value = G.P_CARDS.H_4.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 7},
+        _5 = {name = "5", value = G.P_CARDS.H_5.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 6},
+        _6 = {name = "6", value = G.P_CARDS.H_6.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 6},
+        _7 = {name = "7", value = G.P_CARDS.H_7.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 5},
+        _8 = {name = "8", value = G.P_CARDS.H_8.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 5},
+        _9 = {name = "9", value = G.P_CARDS.H_9.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 5},
+        _T = {name = "10", value = G.P_CARDS.H_T.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 5},
+        _J = {name = "Jack", value = G.P_CARDS.H_J.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 3},
+        _Q = {name = "Queen", value = G.P_CARDS.H_Q.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 3},
+        _K = {name = "King", value = G.P_CARDS.H_K.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 1, l_chips = 3},
+        _A = {name = "Ace", value = G.P_CARDS.H_A.value, mult = 0, chips = 0, level = 1, s_mult = 0, s_chips = 0, l_mult = 2, l_chips = 3},
+    },
+'''
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''local chips = card:get_chip_bonus\(\)'''
+position = 'after'
+payload = ''' + card:get_lunar_chips()'''
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''local mult = card:get_chip_mult\(\)'''
+position = 'after'
+payload = ''' + card:get_lunar_mult()'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+        if specific_vars.bonus_chips then
+            localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {SMODS.signed(specific_vars.bonus_chips)}}
+        end
+'''
+position = 'after'
+match_indent = true
+payload = '''
+if card:get_lunar_chips() ~= 0 then
+    localize{type = 'other', key = 'card_lunar_chips', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_chips())}}
+end
+if card:get_lunar_mult() ~= 0 then
+    localize{type = 'other', key = 'card_lunar_mult', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_mult())}}
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+        if _c.name ~= 'Stone Card' and ((specific_vars and specific_vars.bonus_chips) or (cfg.bonus ~= 0 and cfg.bonus)) then
+            localize{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = {SMODS.signed((specific_vars and specific_vars.bonus_chips) or cfg.bonus)}}
+        end
+'''
+position = 'after'
+match_indent = true
+payload = '''
+if card:get_lunar_chips() ~= 0 then
+    localize{type = 'other', key = 'card_lunar_chips', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_chips())}}
+end
+if card:get_lunar_mult() ~= 0 then
+    localize{type = 'other', key = 'card_lunar_mult', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_mult())}}
+end
 '''

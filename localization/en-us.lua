@@ -6,7 +6,7 @@ return {
                 name = "looF ehT",
                 text = {
                     "Creates the last",
-                    "{C:spectral}Spectral{}, {C:lunar}Lunar{}, or", 
+                    "{C:spectral}Spectral{}, {C:lunaralt}Lunar{}, or", 
                     "{C:reverse}Reverse Tarot{} card", 
                     "used during this run",
                     "{s:0.8,C:red}looF ehT{s:0.8} excluded"
@@ -27,7 +27,7 @@ return {
                 text = {
                     "Creates up to {C:attention}#1#{}",
                     "random {C:dark_edition}Negative",
-                    "{C:lunar}Lunar{} cards"
+                    "{C:lunaralt}Lunar{} cards"
                 }
             },
             -- III
@@ -212,7 +212,7 @@ return {
             c_moon_luna = {
                 name = "Luna",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -222,7 +222,7 @@ return {
             c_moon_ganymede = {
                 name = "Ganymede",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -232,7 +232,7 @@ return {
             c_moon_titan = {
                 name = "Titan",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -242,7 +242,7 @@ return {
             c_moon_callisto = {
                 name = "Callisto",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -252,7 +252,7 @@ return {
             c_moon_io = {
                 name = "Io",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -262,7 +262,7 @@ return {
             c_moon_europa = {
                 name = "Europa",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -272,7 +272,7 @@ return {
             c_moon_triton = {
                 name = "Triton",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -282,7 +282,7 @@ return {
             c_moon_titania = {
                 name = "Titania",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -292,7 +292,7 @@ return {
             c_moon_rhea = {
                 name = "Rhea",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -302,7 +302,7 @@ return {
             c_moon_charon = {
                 name = "Charon",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -312,7 +312,7 @@ return {
             c_moon_dysnomia = {
                 name = "Dysnomia",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -322,7 +322,7 @@ return {
             c_moon_phobos = {
                 name = "Phobos",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
@@ -332,12 +332,24 @@ return {
             c_moon_deimos = {
                 name = "Deimos",
                 text = {
-                    "{S:0.8}({S:0.8}lvl.#1#{S:0.8}){} Level up",
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#s",
                     "{C:mult}+#3#{} Mult and",
                     "{C:chips}+#4#{} chips"
                 }
             }
+        },
+        Other = {
+            card_lunar_chips={
+                text={
+                    "{C:lunaralt}#1#{} chips",
+                },
+            },
+            card_lunar_mult={
+                text={
+                    "{C:lunaralt}#1#{} Mult",
+                },
+            },
         },
     },
     misc = {
