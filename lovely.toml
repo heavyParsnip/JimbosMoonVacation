@@ -12,6 +12,7 @@ position = 'after'
 match_indent = true
 payload = '''
 REVERSE = HEX('a61a20'),
+REVERSEALT = HEX('ea787c'),
 LUNAR = HEX('5b5f8b'),
 LUNARALT = HEX('7478a4'),
 '''
@@ -24,6 +25,7 @@ position = 'after'
 match_indent = true
 payload = '''
 reverse = G.C.REVERSE,
+reversealt = G.C.REVERSEALT,
 lunar = G.C.LUNAR,
 lunaralt = G.C.LUNARALT,
 '''
@@ -124,7 +126,7 @@ position = 'at'
 match_indent = true
 payload = '''
 if self.ability.effect == "Mult Card" then
-    ret = ret + self.ability.mult + (G.GAME.reverse_upgrades.mult*3)
+    ret = ret + self.ability.mult + (G.GAME.reverse_upgrades.mult)
 end
 '''
 
@@ -133,7 +135,7 @@ end
 target = "functions/common_events.lua"
 pattern = '''if _c.effect == 'Mult Card' then loc_vars = \{SMODS.signed\(cfg.mult'''
 position = 'after'
-payload = ''' + (G.GAME.reverse_upgrades.mult*3)'''
+payload = ''' + (G.GAME.reverse_upgrades.mult)'''
 
 # Reverse hierophant upgrades
 [[patches]]
@@ -146,7 +148,7 @@ position = 'before'
 match_indent = true
 payload = '''
 if self.ability.effect == "Bonus Card" then
-    return self.base.nominal + self.ability.bonus + (G.GAME.reverse_upgrades.bonus*20) + (self.ability.perma_bonus or 0)
+    return self.base.nominal + self.ability.bonus + (G.GAME.reverse_upgrades.bonus) + (self.ability.perma_bonus or 0)
 end
 '''
 
@@ -155,7 +157,7 @@ end
 target = "functions/common_events.lua"
 pattern = '''localize\{type = 'other', key = 'card_extra_chips', nodes = desc_nodes, vars = \{SMODS.signed\(\(specific_vars and specific_vars.bonus_chips'''
 position = 'after'
-payload = '''+(G.GAME.reverse_upgrades.bonus*20)'''
+payload = '''+(G.GAME.reverse_upgrades.bonus)'''
 
 # Reverse chariot upgrades
 [[patches]]
@@ -166,7 +168,7 @@ position = 'after'
 match_indent = true
 payload = '''
 if self.ability.effect == "Steel Card" then
-    ret = ret + (G.GAME.reverse_upgrades.steel*0.25)
+    ret = ret + (G.GAME.reverse_upgrades.steel)
 end
 '''
 
@@ -175,7 +177,7 @@ end
 target = "functions/common_events.lua"
 pattern = '''elseif _c.effect == 'Steel Card' then loc_vars = \{'''
 position = 'after'
-payload = '''(G.GAME.reverse_upgrades.steel*0.25)+'''
+payload = '''(G.GAME.reverse_upgrades.steel)+'''
 
 # Reverse justice upgrades
 [[patches]]
@@ -186,7 +188,7 @@ position = 'after'
 match_indent = true
 payload = '''
 if self.ability.effect == "Glass Card" then 
-    ret = ret + (G.GAME.reverse_upgrades.glass*0.5)
+    ret = ret + (G.GAME.reverse_upgrades.glass)
 end
 '''
 
@@ -195,7 +197,7 @@ end
 target = "functions/common_events.lua"
 pattern = '''elseif _c.effect == 'Glass Card' then loc_vars = \{'''
 position = 'after'
-payload = '''(G.GAME.reverse_upgrades.glass*0.5)+'''
+payload = '''(G.GAME.reverse_upgrades.glass)+'''
 
 # Reverse devil upgrades
 [[patches]]
@@ -208,7 +210,7 @@ position = 'after'
 match_indent = true
 payload = '''
 if self.ability.effect == "Gold Card" then
-    ret = ret + (G.GAME.reverse_upgrades.gold*2)
+    ret = ret + (G.GAME.reverse_upgrades.gold)
 end
 '''
 
@@ -218,7 +220,7 @@ target = "functions/common_events.lua"
 pattern = '''elseif _c.effect == 'Gold Card' then loc_vars = {specific_vars and SMODS.signed_dollars(specific_vars.total_h_dollars) or cfg.h_dollars and SMODS.signed_dollars(cfg.h_dollars) or 0}'''
 position = 'at'
 match_indent = true
-payload = '''elseif _c.effect == 'Gold Card' then loc_vars = {specific_vars and SMODS.signed_dollars(specific_vars.total_h_dollars) or cfg.h_dollars and SMODS.signed_dollars(cfg.h_dollars+(G.GAME.reverse_upgrades.gold*4)) or 0}'''
+payload = '''elseif _c.effect == 'Gold Card' then loc_vars = {specific_vars and SMODS.signed_dollars(specific_vars.total_h_dollars) or cfg.h_dollars and SMODS.signed_dollars(cfg.h_dollars+(G.GAME.reverse_upgrades.gold)) or 0}'''
 
 # Reverse tower upgrades
 [[patches]]
@@ -230,7 +232,7 @@ pattern = '''
 position = 'at'
 match_indent = true
 payload = '''
-return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone*30)
+return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_upgrades.stone)
 '''
 
 [[patches]]
@@ -238,21 +240,37 @@ return self.ability.bonus + (self.ability.perma_bonus or 0) + (G.GAME.reverse_up
 target = "functions/common_events.lua"
 pattern = '''elseif _c.effect == 'Stone Card' then loc_vars = \{\(\(specific_vars and SMODS.signed\(specific_vars.bonus_chips'''
 position = 'after'
-payload = '''+(G.GAME.reverse_upgrades.stone*30)'''
+payload = '''+(G.GAME.reverse_upgrades.stone)'''
 
 # Reverse lovers upgrades (placeholder effect)
+# [[patches]]
+# [patches.pattern]
+# target = "card.lua"
+# pattern = '''
+#     local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)
+# '''
+# position = 'after'
+# match_indent = true
+# payload = '''
+# if self.ability.effect == "Wild Card" then
+#     ret = ret + (G.GAME.reverse_upgrades.wild)
+# end
+# '''
+
+# Reverse lovers upgrades for realsies
 [[patches]]
 [patches.pattern]
-target = "card.lua"
-pattern = '''
-    local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)
-'''
-position = 'after'
+target = "functions/common_events.lua"
+pattern = '''if card.seal then'''
+position = 'before'
 match_indent = true
 payload = '''
-if self.ability.effect == "Wild Card" then
-    ret = ret + (G.GAME.reverse_upgrades.wild*0.75)
-end
+    if card.ability.effect == 'Wild Card' then
+        local wild_reps = card:calculate_lunar_wild_reps(context)
+        if wild_reps then
+            ret.wild_reps = wild_reps
+        end
+    end
 '''
 
 ### LUNAR CARDS ###
@@ -306,10 +324,10 @@ pattern = '''
 position = 'after'
 match_indent = true
 payload = '''
-if card:get_lunar_chips() ~= 0 then
+if card and card:get_lunar_chips() ~= 0 then
     localize{type = 'other', key = 'card_lunar_chips', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_chips())}}
 end
-if card:get_lunar_mult() ~= 0 then
+if card and card:get_lunar_mult() ~= 0 then
     localize{type = 'other', key = 'card_lunar_mult', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_mult())}}
 end
 '''
@@ -325,10 +343,10 @@ pattern = '''
 position = 'after'
 match_indent = true
 payload = '''
-if card:get_lunar_chips() ~= 0 then
+if card and card:get_lunar_chips() ~= 0 then
     localize{type = 'other', key = 'card_lunar_chips', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_chips())}}
 end
-if card:get_lunar_mult() ~= 0 then
+if card and card:get_lunar_mult() ~= 0 then
     localize{type = 'other', key = 'card_lunar_mult', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_mult())}}
 end
 '''

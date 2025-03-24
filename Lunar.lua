@@ -29,7 +29,7 @@ SMODS.ConsumableType{
     collection_rows = {6, 7},
     primary_colour = G.C.LUNAR,
     secondary_colour = G.C.LUNAR,
-    shop_rate = 2,
+    shop_rate = 3.5,
 
     loc_txt = {
         collection = 'Lunar Cards',
@@ -53,11 +53,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 0, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_A'
     },
 
@@ -77,6 +77,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -90,11 +94,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 1, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_K'
     },
 
@@ -114,6 +118,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -127,11 +135,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 2, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_Q'
     },
 
@@ -151,6 +159,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -164,11 +176,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 3, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_J'
     },
 
@@ -188,6 +200,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -201,11 +217,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 4, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_T'
     },
 
@@ -225,6 +241,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -238,11 +258,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 5, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_9'
     },
 
@@ -262,6 +282,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -275,11 +299,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 6, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_8'
     },
 
@@ -299,6 +323,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -312,11 +340,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 7, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_7'
     },
 
@@ -336,6 +364,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -349,11 +381,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 8, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_6'
     },
 
@@ -373,6 +405,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -386,11 +422,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 9, y = 0},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_5'
     },
 
@@ -410,6 +446,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -423,11 +463,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 0, y = 1},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_4'
     },
 
@@ -447,6 +487,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -460,11 +504,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 1, y = 1},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_3'
     },
 
@@ -484,6 +528,10 @@ SMODS.Consumable{
         return true
     end,
 
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
+    end,
+
     use = function(self, card, area, copier)
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[self.config.rank].name..'s',chips = G.GAME.lunar_upgrades[self.config.rank].chips, mult = G.GAME.lunar_upgrades[self.config.rank].mult, level=G.GAME.lunar_upgrades[self.config.rank].level})
         level_up_rank(card, self.config.rank, 1)
@@ -497,11 +545,11 @@ SMODS.Consumable{
     set = 'Lunar',
     atlas = 'lunar',
     pos = {x = 2, y = 1},
+    discovered = false,
+    cost = 3,
+    consumeable = true,
 
     config = {
-        discovered = false,
-        cost = 3,
-        consumeable = true,
         rank = '_2'
     },
 
@@ -519,6 +567,10 @@ SMODS.Consumable{
 
     can_use = function(self, card)
         return true
+    end,
+
+    calculate = function(self, card, context)
+        return card:check_asteroidbelt_bonus(self, card, context)
     end,
 
     use = function(self, card, area, copier)
@@ -587,4 +639,17 @@ function Card:get_lunar_mult()
         end
     end
     return 0
+end
+
+function Card:check_asteroidbelt_bonus(self, card, context)
+    if not G.GAME.used_vouchers.v_moon_asteroidbelt or card.ability.debuff then return nil
+    elseif context.individual and context.cardarea == G.play then
+        if context.other_card.base.id == tonumber(string.sub(card.ability.rank, 2, 2)) then
+            return {
+                focus = card,
+                message = localize{type = 'variable', key = 'a_xmult', vars = {G.P_CENTERS.v_moon_asteroidbelt.config.extra}},
+                Xmult_mod = G.P_CENTERS.v_moon_asteroidbelt.config.extra
+            }
+        end
+    end
 end
