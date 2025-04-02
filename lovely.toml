@@ -15,6 +15,7 @@ REVERSE = HEX('a61a20'),
 REVERSEALT = HEX('ea787c'),
 LUNAR = HEX('5b5f8b'),
 LUNARALT = HEX('7478a4'),
+SILVER = HEX('C0C0C0'),
 '''
 
 [[patches]]
@@ -28,6 +29,7 @@ reverse = G.C.REVERSE,
 reversealt = G.C.REVERSEALT,
 lunar = G.C.LUNAR,
 lunaralt = G.C.LUNARALT,
+silver = G.C.SILVER,
 '''
 ### REVERSE TAROT CARDS ###
 # Add reverse tarot upgrade tracking
@@ -118,16 +120,15 @@ payload = '''+G.GAME.reverse_upgrades.lucky'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-    if self.ability.effect == "Mult Card" then
-        ret = ret + self.ability.mult
-    end
+            self.lucky_trigger = true
+            ret = ret + self.ability.mult
+        end
 '''
-position = 'at'
-match_indent = true
+position = 'after'
+match_indent = false
 payload = '''
-if self.ability.effect == "Mult Card" then
-    ret = ret + self.ability.mult + (G.GAME.reverse_upgrades.mult)
-end
+    elseif self.ability.effect == "Mult Card" then
+        ret = ret + self.ability.mult + (G.GAME.reverse_upgrades.mult)
 '''
 
 [[patches]]

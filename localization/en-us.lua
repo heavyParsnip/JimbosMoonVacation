@@ -7,8 +7,8 @@ return {
                 text = {
                     "Creates the last",
                     "{C:spectral}Spectral{}, {C:lunaralt}Lunar{}, or", 
-                    "{C:reverse}Reverse Tarot{} card", 
-                    "used during this run",
+                    "{C:reverse}Reverse{} card used", 
+                    "during this run",
                     "{s:0.8,C:red}looF ehT{s:0.8} excluded"
                 }
             },
@@ -44,7 +44,7 @@ return {
                 name = "rorepmE ehT",
                 text = {
                     "Creates up to {C:attention}#1#{} random",
-                    "{C:reverse}Reverse Tarot{} cards",
+                    "{C:reverse}Reverse{} cards",
                     "{C:inactive}(Must have room){}"
                 }
             },
@@ -402,6 +402,155 @@ return {
                 }
             }
         },
+        Joker = {
+            j_moon_astrophysics = {
+                name = "Astrophysics",
+                text = {
+                    "Create a {C:lunaralt}Lunar{} card",
+                    "whenever a {C:planet}Planet{} card",
+                    "is played",
+                    "{C:inactive}(Must have room){}"
+                }
+            },
+            j_moon_binarystars = {
+                name = "Binary Stars",
+                text = {
+                    "This Joker gains {X:mult,C:white} X#1# {} Mult",
+                    "if played hand is a",
+                    "{C:attention}#2#{} or {C:attention}#3#{}",
+                    "{C:inactive}(Currently {X:mult,C:white} X#4# {C:inactive} Mult)",
+                }
+            },
+            j_moon_cleanslate = {
+                name = "Clean Slate",
+                text = {
+                    "{X:chips,C:white} X#1# {} Chips when a card",
+                    "with no {C:attention}Enhancement{},",
+                    "{C:attention}Seal{}, or {C:dark_edition}Edition{}",
+                    "scores",
+                }
+            },
+            j_moon_doubletake = {
+                name = "Double Take",
+                text = {
+                    "All {C:attention}numbered{} cards also",
+                    "score their {C:attention}rank{}",
+                    "as {C:mult}Mult{}"
+                }
+            },
+            j_moon_emergencyexit = {
+                name = "Emergency Exit",
+                text = {
+                    "Sell this card to",
+                    "gain {C:red}+#1#{} discards",
+                    "until the end of",
+                    "the current {C:attention}round{}"
+                }
+            },
+            j_moon_freezetag = {
+                name = "Freeze Tag",
+                text = {
+                    "Create another {C:attention}Tag{}",
+                    "whenever a {C:attention}Blind{}",
+                    "is skipped"
+                }
+            },
+            j_moon_glasshouse = {
+                name = "Glass House",
+                text = {
+                    "Retrigger all",
+                    "played {C:attention}Stone Cards{}",
+                    "and {C:attention}Glass Cards{}"
+                }
+            },
+            j_moon_jimboroger = {
+                name = "Jimbo Roger",
+                text = {
+                    "Doubles all {C:attention}Blind Rewards",
+                    "and bonus money for",
+                    "{C:attention}remaining hands{}"
+                }
+            },
+            j_moon_lookingglass = {
+                name = "Looking Glass",
+                text = {
+                    "{X:mult,C:white} X#1# {} Mult for",
+                    "every {C:attention}Glass Card{}",
+                    "held in hand"
+                }
+            },
+            j_moon_passport = {
+                name = "Passport",
+                text = {
+                    "This Joker gains {X:mult,C:white} X#1# {} Mult",
+                    "for every {C:attention}Seal{} in",
+                    "your deck"
+                }
+            },
+            j_moon_redshift = {
+                name = "Redshift",
+                text = {
+                    "Whenever {C:chips}Chips{} are scored,",
+                    "add half the amount",
+                    "to {C:mult}Mult{} as well"
+                }
+            },
+            j_moon_roulandus = {
+                name = "Roulandus",
+                text = {
+                    "Add {C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
+                    "and {X:mult,C:white} X#3# {} Mult to your",
+                    "hand after every {C:attention}12th{}",
+                    "card scored",
+                    "{C:inactive}(#4# remaining)"
+                }
+            },
+            j_moon_sagenpaprika = {
+                name = "Sage n' Paprika",
+                text = {
+                    "{C:attention}+#1#{} hand size and",
+                    "{X:mult,C:white} X#2# {} Mult when {C:attention}Blind{}",
+                    "is selected, resets when",
+                    "{C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:attention}+#3#{C:inactive} and {X:mult,C:white} X#4# {C:inactive})"
+                }
+            },
+            j_moon_saltnpepper = {
+                name = "Salt n' Pepper",
+                text = {
+                    "{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
+                    "when {C:attention}Blind{} is selected, resets",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} and {C:mult}+#4#{C:inactive})"
+                }
+            },
+            j_moon_thirdeye = {
+                name = "Third Eye",
+                text = {
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a {C:reverse}Reverse{} card when",
+                    "any {C:tarot}Tarot{} card is played",
+                    "{C:inactive}(Must have room){}"
+                }
+            },
+            j_moon_timebomb = {
+                name = "Time Bomb",
+                text = {
+                    "After {C:attention}#1#{} round, sell",
+                    "this card to destroy",
+                    "all selected cards",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#3#)"
+                }
+            },
+            j_moon_upsidedown = {
+                name = "Upside Down",
+                text = {
+                    "All {C:attention}6s{} also count",
+                    "as {C:attention}9s{}, and all {C:attention}9s",
+                    "also count as {C:attention}6s"
+                }
+            },
+        },
         Blind = {
             bl_rain={
                 name="The Rain",
@@ -493,6 +642,32 @@ return {
                 },
             }
         },
+        Spectral = {
+            c_moon_quasar = {
+                name = "Quasar",
+                text = {
+                    "Upgrade every",
+                    "{C:legendary,E:1}rank{} by",
+                    "{C:attention}1{} level"
+                }
+            },
+            c_moon_syzygy = {
+                name = "Syzygy",
+                text = {
+                    "Add a {C:silver}Silver Seal{}",
+                    "to {C:attention}1{} selected",
+                    "card in your hand"
+                }
+            },
+            c_moon_augur = {
+                name = "Augur",
+                text = {
+                    "Add a {C:reverse}Reverse Seal{}",
+                    "to {C:attention}1{} selected",
+                    "card in your hand"
+                }
+            }
+        },
         Other = {
             card_lunar_chips={
                 text={
@@ -504,7 +679,6 @@ return {
                     "{C:lunaralt}#1#{} Mult",
                 },
             },
-
             p_moon_reverse_normal_1={
                 name="Reverse Pack",
                 group_name="Reverse Pack",
@@ -577,6 +751,26 @@ return {
                     "be used immediately",
                 },
             },
+            moon_silver_seal = {
+                label = "Silver Seal",
+                name = "Silver Seal",
+                text = {
+                    "Creates the {C:lunaralt}Lunar{} card for",
+                    "this card's rank at the",
+                    "end of a round if {C:attention}held{}",
+                    "in hand",
+                    "{C:inactive}(Must have room){}"
+                }
+            },
+            moon_reverse_seal = {
+                label = "Reverse Seal",
+                name = "Reverse Seal",
+                text = {
+                    "Flips all held {C:tarot}Tarot{}",
+                    "cards into {C:reverse}Reverse{}",
+                    "cards when {C:attention}discarded"
+                }
+            }
         },
     },
     misc = {
@@ -584,7 +778,13 @@ return {
             k_nuhuh = "Nuh-uh!",
             k_moon_reversepack = "Reverse Pack",
             k_moon_lunarpack = "Lunar Pack",
-            k_flipped = "Flipped!"
+            k_plus_lunar = "+1 Lunar",
+            k_flipped = "Flipped!",
+            k_plunder = "Plunder!",
+            k_avast = "Avast!",
+            k_yoho = "Yoho!",
+            k_ahoy = "Ahoy!",
+            k_freezetag = "You're it!"
         }
     }
 }

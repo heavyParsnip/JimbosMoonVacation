@@ -38,24 +38,7 @@ SMODS.Voucher{
 
     in_pool = function(self, args)
         return G.GAME.used_vouchers.v_moon_eclipse
-    end,
-
-    -- calculate = function(self, card, context)
-    --     if context.individual and context.cardarea == G.play then
-    --         for i=1, #G.consumeables.cards do
-    --             if G.consumeables.cards[i].ability.set == "Lunar" and not G.consumeables.cards[i].ability.debuff then
-    --                 if G.GAME.used_vouchers.v_moon_asteroidbelt and context.other_card.base.id == tonumber(string.sub(G.consumeables.cards[i].ability.rank, 2, 2)) then
-    --                     return {
-    --                         --focus = G.consumeables.cards[i],
-    --                         message = localize{type = 'variable', key = 'a_xmult', vars = {G.P_CENTERS.v_moon_asteroidbelt.config.extra}},
-    --                         Xmult_mod = G.P_CENTERS.v_moon_asteroidbelt.config.extra,
-    --                         card = G.consumeables.cards[i]
-    --                     }
-    --                 end
-    --             end
-    --         end
-    --     end
-    -- end
+    end
 }
 
 SMODS.Voucher{
@@ -64,11 +47,11 @@ SMODS.Voucher{
     pos = { x = 0, y = 0 },
 
     config = {
-        new_tarots = 1
+        reverse_rate = 2
     },
 
     redeem = function(self, card)
-        
+        G.GAME.reverse_rate = card.ability.reverse_rate
     end
 }
 
@@ -76,10 +59,6 @@ SMODS.Voucher{
     key = 'twistoffate',
     atlas = 'voucher',
     pos = { x = 0, y = 0 },
-
-    config = {
-
-    },
 
     in_pool = function(self, args)
         return G.GAME.used_vouchers.v_moon_fortuneflipper

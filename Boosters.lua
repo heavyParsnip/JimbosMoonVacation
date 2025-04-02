@@ -310,10 +310,9 @@ SMODS.Booster{
     update_pack = function(self, dt)
         init_lunar_booster(self, dt)
     end
-
 }
 
-function init_reverse_booster(self, dt) -- i just want custom colors seamlessly    
+function init_reverse_booster(self, dt) -- gotta get those custom colors
     if G.buttons then G.buttons:remove(); G.buttons = nil end
     if G.shop then G.shop.alignment.offset.y = G.ROOM.T.y+11 end
 
