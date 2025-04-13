@@ -90,7 +90,6 @@ if card.config.center.set == 'Reverse' or card.config.center.set == 'Lunar' or c
 end
 '''
 
-
 # Factor magician upgrades
 [[patches]]
 [patches.pattern]
@@ -267,7 +266,7 @@ position = 'before'
 match_indent = true
 payload = '''
     if card.ability.effect == 'Wild Card' then
-        local wild_reps = card:calculate_lunar_wild_reps(context)
+        local wild_reps = card:calculate_reverse_wild_reps(context)
         if wild_reps then
             ret.wild_reps = wild_reps
         end
@@ -300,19 +299,43 @@ payload = '''
     },
 '''
 
-[[patches]]
-[patches.regex]
-target = "functions/common_events.lua"
-pattern = '''local chips = card:get_chip_bonus\(\)'''
-position = 'after'
-payload = ''' + card:get_lunar_chips()'''
+# [[patches]]
+# [patches.regex]
+# target = "functions/common_events.lua"
+# pattern = '''local chips = card:get_chip_bonus\(\)'''
+# position = 'after'
+# payload = ''' + card:get_lunar_chips()'''
 
 [[patches]]
-[patches.regex]
-target = "functions/common_events.lua"
-pattern = '''local mult = card:get_chip_mult\(\)'''
+[patches.pattern]
+target = "card.lua"
+pattern = '''return self.base.nominal + self.ability.bonus + (G.GAME.reverse_upgrades.bonus) + (self.ability.perma_bonus or 0)'''
+position = 'at'
+match_indent = true
+payload = '''return self.base.nominal + self.ability.bonus + (G.GAME.reverse_upgrades.bonus) + (self.ability.perma_bonus or 0) + self:get_lunar_chips() '''
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''return self.base.nominal + self.ability.bonus + (self.ability.perma_bonus or 0)'''
+position = 'at'
+match_indent = true
+payload = '''return self.base.nominal + self.ability.bonus + (self.ability.perma_bonus or 0) + self:get_lunar_chips() '''
+
+# [[patches]]
+# [patches.regex]
+# target = "functions/common_events.lua"
+# pattern = '''local mult = card:get_chip_mult\(\)'''
+# position = 'after'
+# payload = ''' + card:get_lunar_mult()'''
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local ret = self.ability.perma_mult or 0'''
 position = 'after'
-payload = ''' + card:get_lunar_mult()'''
+match_indent = true
+payload = '''ret = ret + self:get_lunar_mult()'''
 
 [[patches]]
 [patches.pattern]
@@ -349,5 +372,20 @@ if card and card:get_lunar_chips() ~= 0 then
 end
 if card and card:get_lunar_mult() ~= 0 then
     localize{type = 'other', key = 'card_lunar_mult', nodes = desc_nodes, vars = {SMODS.signed(card:get_lunar_mult())}}
+end
+'''
+
+# Keep hand chips from going below 0 during the Rain
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''return _chips'''
+position = 'before'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == "bl_moon_rain" then
+    if _chips < 1 then
+        _chips = 1
+    end
 end
 '''

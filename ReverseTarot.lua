@@ -597,7 +597,7 @@ SMODS.Consumable{
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.1,
-                func = function()   -- don't bully me....
+                func = function()   -- clean this up eventually maybe...
                     if(G.hand.highlighted[i].base.id == 14) then
                         SMODS.change_base(G.hand.highlighted[i], nil, 'King')
                     elseif(G.hand.highlighted[i].base.id == 13) then
@@ -784,18 +784,28 @@ SMODS.Consumable{
 
     config = {
         penalty_per_spectral = 2,
+        spectrals = 2,
         money_penalty = 0,
-        max_penalty = 30
+        max_penalty = 30,
+        spectrals_used = 0
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
                 center.ability.penalty_per_spectral,
+                center.ability.spectrals,
                 center.ability.max_penalty,
-                center.ability.money_penalty
+                center.ability.money_penalty,
             }
         }
+    end,
+
+    update = function(self, card, dt)
+        self.config.money_penalty = 0
+        for k, v in pairs(G.GAME.consumeable_usage) do
+            if v.set == 'Spectral' then self.config.money_penalty = self.config.money_penalty + 2 end
+        end
     end,
 
     can_use = function(self, card)
@@ -803,28 +813,35 @@ SMODS.Consumable{
     end,
 
     use = function(self, card, area, copier)
-        local spectrals_used = 0
-        for k, v in pairs(G.GAME.consumeable_usage) do
-            if v.set == 'Spectral' then spectrals_used = spectrals_used + 1 end
+        if self.config.money_penalty ~= 0 then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    card:juice_up(0.3, 0.5)
+                    ease_dollars(-(math.min(self.config.money_penalty, card.ability.max_penalty)), true)
+                    return true 
+                end
+            }))
         end
-        self.config.money_penalty = spectrals_used*2
-        
-        for i = 1, G.consumeables.config.card_limit - #G.consumeables.cards do
-            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after', 
-                    delay = 0.4, 
-                    func = function()
+        delay(0.4)
+        for i = 1, card.ability.spectrals do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                         play_sound('timpani')
                         local new_card = SMODS.create_card{set = "Spectral", area = G.consumeables}
                         new_card:add_to_deck()
                         G.consumeables:emplace(new_card)
                         card:juice_up(0.3, 0.5)
-                        ease_dollars(-(math.min(self.config.money_penalty, card.ability.max_penalty)), true)
-                        return true 
+                        G.GAME.consumeable_buffer = 0
                     end
-                }))
-            end
+                    return true 
+                end
+            }))
         end
         delay(0.6)
     end
@@ -1261,7 +1278,7 @@ function set_edition_pn(joker)
     end
 end
 
-function Card:calculate_lunar_wild_reps(context)
+function Card:calculate_reverse_wild_reps(context)
 	if self.debuff then return nil end
 	if context.repetition then
 		if G.GAME.reverse_upgrades.wild > 0 then

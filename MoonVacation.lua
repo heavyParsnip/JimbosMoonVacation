@@ -1,3 +1,10 @@
+SMODS.current_mod.optional_features = {
+    post_trigger = true,
+    cardareas = {
+        deck = true
+    }
+}
+
 assert(SMODS.load_file("ReverseTarot.lua"))()
 assert(SMODS.load_file("Lunar.lua"))()
 assert(SMODS.load_file("Boosters.lua"))()
@@ -5,6 +12,7 @@ assert(SMODS.load_file("Tags.lua"))()
 assert(SMODS.load_file("Vouchers.lua"))()
 assert(SMODS.load_file("Jokers.lua"))()
 assert(SMODS.load_file("Seals.lua"))()
+assert(SMODS.load_file("Blinds.lua"))()
 
 -- JOKER TIME BABY
 local sub = "jokers"

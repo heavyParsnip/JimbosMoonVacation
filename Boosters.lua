@@ -36,7 +36,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Reverse', area = G.hand, skip_materialize = true}
+        return create_card('Reverse', G.pack_cards, nil, nil, true, true, nil, 'rev')
     end,
     
     update_pack = function(self, dt)
@@ -75,7 +75,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Reverse', area = G.hand, skip_materialize = true}
+        return create_card('Reverse', G.pack_cards, nil, nil, true, true, nil, 'rev')
     end,
 
     update_pack = function(self, dt)
@@ -84,7 +84,7 @@ SMODS.Booster{
 }
 
 SMODS.Booster{
-    key = 'reverse_jumbo',
+    key = 'reverse_jumbo_1',
     group_key = 'k_moon_reversepack',
     atlas = 'booster',
     pos = {x = 2, y = 0},
@@ -113,7 +113,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Reverse', area = G.hand, skip_materialize = true}
+        return create_card('Reverse', G.pack_cards, nil, nil, true, true, nil, 'rev')
     end,
 
     update_pack = function(self, dt)
@@ -123,7 +123,7 @@ SMODS.Booster{
 }
 
 SMODS.Booster{
-    key = 'reverse_mega',
+    key = 'reverse_mega_1',
     group_key = 'k_moon_reversepack',
     atlas = 'booster',
     pos = {x = 3, y = 0},
@@ -152,7 +152,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Reverse', area = G.hand, skip_materialize = true}
+        return create_card('Reverse', G.pack_cards, nil, nil, true, true, nil, 'rev')
     end,
 
     update_pack = function(self, dt)
@@ -191,7 +191,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Lunar', area = G.hand, skip_materialize = true}
+        return create_card('Lunar', G.pack_cards, nil, nil, true, true, nil, 'lun')
     end,
 
     update_pack = function(self, dt)
@@ -228,7 +228,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Lunar', area = G.hand, skip_materialize = true}
+        return create_card('Lunar', G.pack_cards, nil, nil, true, true, nil, 'lun')
     end,
 
     update_pack = function(self, dt)
@@ -238,7 +238,7 @@ SMODS.Booster{
 }
 
 SMODS.Booster{
-    key = 'lunar_jumbo',
+    key = 'lunar_jumbo_1',
     group_key = 'k_moon_lunarpack',
     atlas = 'booster',
     pos = {x = 2, y = 1},
@@ -266,7 +266,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Lunar', area = G.hand, skip_materialize = true}
+        return create_card('Lunar', G.pack_cards, nil, nil, true, true, nil, 'lun')
     end,
 
     update_pack = function(self, dt)
@@ -276,7 +276,7 @@ SMODS.Booster{
 }
 
 SMODS.Booster{
-    key = 'lunar_mega',
+    key = 'lunar_mega_1',
     group_key = 'k_moon_lunarpack',
     atlas = 'booster',
     pos = {x = 3, y = 1},
@@ -304,7 +304,7 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        return SMODS.create_card{set = 'Lunar', area = G.hand, skip_materialize = true}
+        return create_card('Lunar', G.pack_cards, nil, nil, true, true, nil, 'lun')
     end,
 
     update_pack = function(self, dt)

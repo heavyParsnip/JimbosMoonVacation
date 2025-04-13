@@ -12,11 +12,10 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
-            if not context.other_card.base.value == 'Jack' and not context.other_card.base.value == 'Queen' and not context.other_card.base.value == 'King' then
+            if not (context.other_card:get_id() == 11 or context.other_card:get_id() == 12 or context.other_card:get_id() == 13) then
                 return {
-                    message = localize{type='variable',key='a_mult',vars={context.other_card.base.nominal}},
-                    mult_mod = context.other_card.base.nominal,
-                } 
+                    mult = context.other_card.base.nominal,
+                }
             end
         end
     end

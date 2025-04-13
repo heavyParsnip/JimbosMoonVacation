@@ -15,10 +15,15 @@ SMODS.Joker{
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()
-                    add_tag(get_next_tag_key())
+                    add_tag(Tag(get_next_tag_key()))
                     return true
                 end
             }))
+            return {
+                message = localize('k_freezetag'),
+                colour = G.C.ORANGE,
+                card = card
+            }
         end
     end
 }

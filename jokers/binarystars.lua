@@ -11,7 +11,7 @@ SMODS.Joker{
     perishable_compat = true,
 
     config = {
-        xmult = 1,
+        xmult = 0,
         extra = {
             bonus_xmult = 0.2,
         }
@@ -41,7 +41,7 @@ SMODS.Joker{
 
         if context.joker_main and card.ability.xmult > 1 then
             return {
-                x_mult = card.ability.xmult,
+                x_mult = 1 + card.ability.xmult,
                 colour = G.C.RED,
                 card = card
             }

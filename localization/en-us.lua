@@ -139,9 +139,9 @@ return {
                 name = "ecnarepmeT",
                 text = {
                     "Lose {C:money}$#1#{} per {C:spectral}Spectral{} card used",
-                    "this run, then fill your consumable",
-                    "area with {C:spectral}Spectral{} cards",
-                    "{C:inactive}(Max of{} {C:money}-$#2#{}{C:inactive}) (Currently {}{C:money}$#3#{}{C:inactive}){}"
+                    "this run, then creates up to",
+                    "#2# random {C:spectral}Spectral{} cards",
+                    "{C:inactive}(Max of{} {C:money}-$#3#{}{C:inactive}) (Currently {}{C:money}-$#4#{}{C:inactive}){}"
                 }
             },
             -- XV
@@ -407,8 +407,8 @@ return {
                 name = "Astrophysics",
                 text = {
                     "Create a {C:lunaralt}Lunar{} card",
-                    "whenever a {C:planet}Planet{} card",
-                    "is played",
+                    "whenever a {C:planet}Planet{}",
+                    "card is played",
                     "{C:inactive}(Must have room){}"
                 }
             },
@@ -426,16 +426,15 @@ return {
                 text = {
                     "{X:chips,C:white} X#1# {} Chips when a card",
                     "with no {C:attention}Enhancement{},",
-                    "{C:attention}Seal{}, or {C:dark_edition}Edition{}",
-                    "scores",
+                    "{C:attention}Seal{}, or {C:dark_edition}Edition{} scores",
                 }
             },
             j_moon_doubletake = {
                 name = "Double Take",
                 text = {
-                    "All {C:attention}numbered{} cards also",
-                    "score their {C:attention}rank{}",
-                    "as {C:mult}Mult{}"
+                    "All {C:attention}numbered{} cards",
+                    "also score their",
+                    "{C:attention}rank{} as {C:mult}Mult{}"
                 }
             },
             j_moon_emergencyexit = {
@@ -466,9 +465,9 @@ return {
             j_moon_jimboroger = {
                 name = "Jimbo Roger",
                 text = {
-                    "Doubles all {C:attention}Blind Rewards",
-                    "and bonus money for",
-                    "{C:attention}remaining hands{}"
+                    "Adds {C:attention}#1#{} free",
+                    "basic {C:attention}Booster Packs",
+                    "to every {C:attention}shop{}"
                 }
             },
             j_moon_lookingglass = {
@@ -482,9 +481,11 @@ return {
             j_moon_passport = {
                 name = "Passport",
                 text = {
-                    "This Joker gains {X:mult,C:white} X#1# {} Mult",
-                    "for every {C:attention}Seal{} in",
-                    "your deck"
+                    "Gives {X:mult,C:white} X#1# {} Mult",
+                    "for each {C:attention}Seal{} in",
+                    "your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+
                 }
             },
             j_moon_redshift = {
@@ -539,7 +540,7 @@ return {
                     "After {C:attention}#1#{} round, sell",
                     "this card to destroy",
                     "all selected cards",
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#3#)"
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#)"
                 }
             },
             j_moon_upsidedown = {
@@ -552,93 +553,123 @@ return {
             },
         },
         Blind = {
-            bl_rain={
+            bl_moon_rain={
                 name="The Rain",
                 text={
-                    "Played cards reduce chips",
+                    "Playing cards reduce chips",
                     "instead of adding them"
                 },
             },
-            bl_torch={
+            bl_moon_torch={
                 name="The Torch",
                 text={
-                    "Destroy all cards played",
+                    "Destroy all cards",
                     "in the winning hand"
                 },
             },
-            bl_cloud={
+            bl_moon_cloud={
                 name="The Cloud",
                 text={
-                    "Cards are drawn face down",
-                    "after each discard used"
+                    "Cards are drawn face",
+                    "down after discard"
                 },
             },
-            bl_mirror={
+            bl_moon_mirror={
                 name="The Mirror",
                 text={
                     "Invert the suits",
                     "of played cards"
                 },
             },
-            bl_storm={
+            bl_moon_storm={
                 name="The Storm",
                 text={
                     "Debuff all cards held",
                     "in hand after Play"
                 },
             },
-            bl_boulder={
+            bl_moon_boulder={
                 name="The Boulder",
                 text={
                     "1 in 2 scored cards add",
-                    "a Stone card to your hand",
+                    "a Stone Card to your hand",
                 },
             },
-            bl_foot={
+            bl_moon_foot={
                 name="The Foot",
                 text={
                     "Only the last 2 cards",
-                    "played are scored"
+                    "in each hand are scored"
                 },
             },
-            bl_slab={
+            bl_moon_slab={
                 name="The Slab",
                 text={
                     "Cards not played this",
                     "Ante are debuffed"
                 },
             },
-            bl_nose={
+            bl_moon_nose={
                 name="The Nose",
                 text={
-                    "idk"
+                    "Debuff the left or right",
+                    "half of your hand after draw"
                 },
             },
-            bl_final_sword={
+            bl_moon_ladder={
+                name="The Ladder",
+                text={
+                    "Reduce the rank of",
+                    "played cards by 1"
+                },
+            },
+            bl_moon_lens={
+                name="The Lens",
+                text={
+                    "Only the first suit in",
+                    "each played hand scores"
+                },
+            },
+            bl_moon_gate={
+                name="The Gate",
+                text={
+                    "Blind size increases by",
+                    "X1.1 per card discarded"
+                },
+            },
+            bl_moon_final_sword={
                 name="Silver Sword",
                 text={
                     "Played cards lose",
                     "their Enhancements"
                 },
             },
-            bl_final_coin={
+            bl_moon_final_coin={
                 name="Copper Coin",
                 text={
-                    "Lose chips equal to money when a card",
-                    "is scored. Earn $2 per card played"
+                    "Earn $2 and lose Mult equal",
+                    "to money when a card scores"
                 },
             },
-            bl_final_shield={
+            bl_moon_final_shield={
                 name="Saffron Shield",
                 text={
-                    "After a card is scored, debuff",
-                    "all cards of the same rank"
+                    "After scoring, debuff",
+                    "all ranks played"
                 },
             }, 
-            bl_final_rose={
-                name="The Ruby Rose",
+            bl_moon_final_rose={
+                name="Ruby Rose",
                 text={
-
+                    "Base Chips and Mult",
+                    "are reduced to 1"
+                },
+            },
+            bl_moon_final_moon={
+                name="Full Moon",
+                text={
+                    "Only the first card",
+                    "in each hand is scored"
                 },
             }
         },
@@ -697,7 +728,7 @@ return {
                     "be used immediately",
                 },
             },
-            p_moon_reverse_jumbo={
+            p_moon_reverse_jumbo_1={
                 name="Jumbo Reverse Pack",
                 group_name="Reverse Pack",
                 text={
@@ -706,7 +737,7 @@ return {
                     "be used immediately",
                 },
             },
-            p_moon_reverse_mega={
+            p_moon_reverse_mega_1={
                 name="Mega Reverse Pack",
                 group_name="Reverse Pack",
                 text={
@@ -733,7 +764,7 @@ return {
                     "be used immediately",
                 },
             },
-            p_moon_lunar_jumbo={
+            p_moon_lunar_jumbo_1={
                 name="Jumbo Lunar Pack",
                 group_name="Lunar Pack",
                 text={
@@ -742,7 +773,7 @@ return {
                     "be used immediately",
                 },
             },
-            p_moon_lunar_mega={
+            p_moon_lunar_mega_1={
                 name="Mega Lunar Pack",
                 group_name="Lunar Pack",
                 text={
@@ -779,12 +810,20 @@ return {
             k_moon_reversepack = "Reverse Pack",
             k_moon_lunarpack = "Lunar Pack",
             k_plus_lunar = "+1 Lunar",
+            k_plus_reverse = "+1 Reverse",
             k_flipped = "Flipped!",
             k_plunder = "Plunder!",
             k_avast = "Avast!",
-            k_yoho = "Yoho!",
+            k_yoho = "Yoho, yoho!",
             k_ahoy = "Ahoy!",
-            k_freezetag = "You're it!"
+            k_treasure = "There be treasure!",
+            k_booty = "Booty abound!",
+            k_arrr = "Arrr...",
+            k_freezetag = "You're it!",
+            k_timebombready = "Ready to blow!",
+            k_timebombboom = "KABOOOOOOM!!",
+            k_torched = "Torched!",
+            k_taxed = "-#1# Chips"
         }
     }
 }

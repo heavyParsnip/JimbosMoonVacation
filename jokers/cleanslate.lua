@@ -2,7 +2,7 @@ SMODS.Joker{
     key = 'cleanslate',
     atlas = 'jokers',
     pos = {x = 0, y = 0},
-    cost = 7,
+    cost = 8,
     rarity = 3,
     unlocked = true,
     discovered = false,
@@ -12,7 +12,7 @@ SMODS.Joker{
 
     config = {
         extra = {
-            xchips = 1.5,
+            xchips = 2,
         }
     },
     
