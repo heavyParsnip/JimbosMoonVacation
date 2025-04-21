@@ -23,7 +23,7 @@ SMODS.Joker{
                 center.ability.extra.bonus_xmult,
                 'Pair',
                 'Two Pair',
-                center.ability.xmult
+                1+center.ability.xmult
             }
         }
     end,
@@ -33,7 +33,7 @@ SMODS.Joker{
             if (next(context.poker_hands['Pair']) or next(context.poker_hands['Two Pair'])) and not (next(context.poker_hands['Three of a Kind']) or next(context.poker_hands['Four of a Kind']) or next(context.poker_hands['Full House']) or next(context.poker_hands['Five of a Kind']) or next(context.poker_hands['Flush Five']) or next(context.poker_hands['Flush House'])) then
                 card.ability.xmult = card.ability.xmult + card.ability.extra.bonus_xmult
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.RED})
-            elseif card.ability.xmult >  1 then
+            else
                 card.ability.xmult = card.ability.xmult - card.ability.extra.bonus_xmult
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult_minus', vars={card.ability.extra.bonus_xmult}}, colour = G.C.RED})
             end

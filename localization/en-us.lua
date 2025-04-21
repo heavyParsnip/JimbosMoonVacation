@@ -417,16 +417,17 @@ return {
                 text = {
                     "This Joker gains {X:mult,C:white} X#1# {} Mult",
                     "if played hand is a",
-                    "{C:attention}#2#{} or {C:attention}#3#{}",
+                    "{C:attention}#2#{} or {C:attention}#3#{},",
+                    "or {X:mult,C:white} -X#1# {} if not",
                     "{C:inactive}(Currently {X:mult,C:white} X#4# {C:inactive} Mult)",
                 }
             },
             j_moon_cleanslate = {
                 name = "Clean Slate",
                 text = {
-                    "{X:chips,C:white} X#1# {} Chips when a card",
-                    "with no {C:attention}Enhancement{},",
-                    "{C:attention}Seal{}, or {C:dark_edition}Edition{} scores",
+                    "{X:chips,C:white} X#1# {} Chips when a",
+                    "card with no",
+                    "{C:attention}Enhancement{} scores"
                 }
             },
             j_moon_doubletake = {

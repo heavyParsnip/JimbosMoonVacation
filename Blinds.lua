@@ -132,6 +132,32 @@ SMODS.Blind{
     boss = { min = 1, max = 10 },
     boss_colour = HEX('bddec5'),
 
+    press_play = function(self)
+        -- for i = 1, #G.play.cards do
+        --     local percent = 1.15 - (i-0.999)/(#G.play.cards-0.998)*0.3
+        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.play.cards[i]:flip();play_sound('card1', percent);G.play.cards[i]:juice_up(0.2, 0.2);return true end }))
+        -- end
+        -- delay(0.2)
+        -- for i = 1, #G.play.cards do
+        --     if G.play.cards[i].ability.effect == 'Stone Card' or G.play.cards[i].debuff then return end
+        --     local suit = G.play.cards[i].base.suit
+        --     if suit == 'Spades' then
+        --         suit = 'Clubs'
+        --     elseif suit == 'Clubs' then
+        --         suit = 'Spades'
+        --     elseif suit == 'Hearts' then
+        --         suit = 'Diamonds'
+        --     elseif suit == 'Diamonds' then
+        --         suit = 'Hearts'
+        --     end
+        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.play.cards[i]:change_suit(suit);return true end }))
+        -- end
+        -- for i = 1, #G.play.cards do
+        --     local percent = 0.85 + (i-0.999)/(#G.play.cards-0.998)*0.3
+        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.play.cards[i]:flip();play_sound('tarot2', percent, 0.6);G.play.cards[i]:juice_up(0.2, 0.2);return true end }))
+        -- end
+    end,
+
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
             blind:wiggle()
@@ -420,6 +446,7 @@ SMODS.Blind{
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
             blind:wiggle()
+            if G.play.cards[1].ability.name == "Stone Card" then return end -- hidden tech
             for i = 1, #G.play.cards do
                 if G.play.cards[i].base.suit ~= G.play.cards[1].base.suit then
                     G.play.cards[i]:set_debuff(true)
@@ -506,14 +533,8 @@ SMODS.Blind{
                     delay(0.08)
                     return true
                 end
-            }))
-                
+            }))     
         end
-
-        
-        -- elseif context.other_card then
-        --     card_eval_status_text(context.other_card, 'extra', nil, nil, nil, {type='variable',key='k_taxed',vars={G.GAME.dollars + (G.GAME.dollar_buffer or 0)},colour=G.C.MONEY,delay=0.2})
-        -- end
     end
 }
 

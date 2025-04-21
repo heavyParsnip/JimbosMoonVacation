@@ -12,7 +12,7 @@ SMODS.Joker{
 
     config = {
         extra = {
-            xchips = 2,
+            xchips = 1.5,
         }
     },
     
@@ -25,7 +25,7 @@ SMODS.Joker{
     end,
 
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and (context.other_card.ability.name == "Default Base" and not context.other_card.seal and not context.other_card.edition) then
+        if context.individual and context.cardarea == G.play and (context.other_card.ability.name == "Default Base") then
             return {
                 x_chips = card.ability.extra.xchips,
                 colour = G.C.BLUE,

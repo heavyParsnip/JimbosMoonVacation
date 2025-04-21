@@ -8,7 +8,7 @@ SMODS.Atlas{
 SMODS.Voucher{
     key = 'eclipse',
     atlas = 'voucher',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
 
     config = {
         extra = 2
@@ -22,7 +22,7 @@ SMODS.Voucher{
 SMODS.Voucher{
     key = 'asteroidbelt',
     atlas = 'voucher',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 1 },
 
     config = {
         extra = 1.2
@@ -58,7 +58,7 @@ SMODS.Voucher{
 SMODS.Voucher{
     key = 'twistoffate',
     atlas = 'voucher',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
 
     in_pool = function(self, args)
         return G.GAME.used_vouchers.v_moon_fortuneflipper

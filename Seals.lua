@@ -96,82 +96,86 @@ SMODS.Seal{
 
     calculate = function(self, card, context)
         if context.pre_discard then
-            if not card.debuff then
-                local tarots = {}
-
-                for k, v in ipairs(G.consumeables.cards) do
-                    if v.ability.set == "Tarot" then tarots[#tarots+1] = v end
-                end
-
-                if #tarots > 0 then card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flipped'), colour = G.C.REVERSE}) end
-
-                for i=1, #tarots do
-                    local percent = 1.15 - (i-0.999)/(#tarots-0.998)*0.3
-                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() tarots[i]:flip();play_sound('card1', percent);tarots[i]:juice_up(0.3, 0.3);return true end }))
-                end
-                delay(0.2)
-
-                for i=1, #tarots do
-                    local key = tarots[i].config.center.key
-                    --print(key)
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.15, 
-                        func = function()
-                            if key == 'c_fool' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversefool)
-                            elseif key == 'c_magician' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversemagician)
-                            elseif key == 'c_high_priestess' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehighpriestess)
-                            elseif key == 'c_empress' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseempress)
-                            elseif key == 'c_emperor' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseemperor)
-                            elseif key == 'c_heirophant' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehierophant)
-                            elseif key == 'c_lovers' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reverselovers)
-                            elseif key == 'c_chariot' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversechariot)
-                            elseif key == 'c_justice' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversejustice)
-                            elseif key == 'c_hermit' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehermit)
-                            elseif key == 'c_wheel_of_fortune' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversewheeloffortune)
-                            elseif key == 'c_strength' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversestrength)
-                            elseif key == 'c_hanged_man' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehangedman)
-                            elseif key == 'c_death' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversedeath)
-                            elseif key == 'c_temperance' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversetemperance)
-                            elseif key == 'c_devil' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversedevil)
-                            elseif key == 'c_tower' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversetower)
-                            elseif key == 'c_star' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversestar)
-                            elseif key == 'c_moon' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversemoon)
-                            elseif key == 'c_sun' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversesun)
-                            elseif key == 'c_judgement' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reversejudgement)
-                            elseif key == 'c_world' then
-                                tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseworld)
-                            end
-                            return true
+            for k,v in pairs(G.hand.highlighted) do
+                if v.seal == card.seal then
+                    if not card.debuff then
+                        local tarots = {}
+        
+                        for k, v in ipairs(G.consumeables.cards) do
+                            if v.ability.set == "Tarot" then tarots[#tarots+1] = v end
                         end
-                    }))
+        
+                        if #tarots > 0 then card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_flipped'), colour = G.C.REVERSE}) end
+        
+                        for i=1, #tarots do
+                            local percent = 1.15 - (i-0.999)/(#tarots-0.998)*0.3
+                            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() tarots[i]:flip();play_sound('card1', percent);tarots[i]:juice_up(0.3, 0.3);return true end }))
+                        end
+                        delay(0.2)
+        
+                        for i=1, #tarots do
+                            local key = tarots[i].config.center.key
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.15, 
+                                func = function()
+                                    if key == 'c_fool' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversefool)
+                                    elseif key == 'c_magician' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversemagician)
+                                    elseif key == 'c_high_priestess' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehighpriestess)
+                                    elseif key == 'c_empress' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseempress)
+                                    elseif key == 'c_emperor' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseemperor)
+                                    elseif key == 'c_heirophant' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehierophant)
+                                    elseif key == 'c_lovers' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reverselovers)
+                                    elseif key == 'c_chariot' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversechariot)
+                                    elseif key == 'c_justice' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversejustice)
+                                    elseif key == 'c_hermit' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehermit)
+                                    elseif key == 'c_wheel_of_fortune' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversewheeloffortune)
+                                    elseif key == 'c_strength' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversestrength)
+                                    elseif key == 'c_hanged_man' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversehangedman)
+                                    elseif key == 'c_death' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversedeath)
+                                    elseif key == 'c_temperance' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversetemperance)
+                                    elseif key == 'c_devil' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversedevil)
+                                    elseif key == 'c_tower' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversetower)
+                                    elseif key == 'c_star' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversestar)
+                                    elseif key == 'c_moon' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversemoon)
+                                    elseif key == 'c_sun' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversesun)
+                                    elseif key == 'c_judgement' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reversejudgement)
+                                    elseif key == 'c_world' then
+                                        tarots[i]:set_ability(G.P_CENTERS.c_moon_reverseworld)
+                                    end
+                                    return true
+                                end
+                            }))
+                        end
+                        for i=1, #tarots do
+                            local percent = 0.85 + (i-0.999)/(#tarots-0.998)*0.3
+                            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() tarots[i]:flip();play_sound('tarot2', percent, 0.6);tarots[i]:juice_up(0.3, 0.3);return true end }))
+                        end
+                        delay(0.2)
+                    break
+                    end
                 end
-                for i=1, #tarots do
-                    local percent = 0.85 + (i-0.999)/(#tarots-0.998)*0.3
-                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() tarots[i]:flip();play_sound('tarot2', percent, 0.6);tarots[i]:juice_up(0.3, 0.3);return true end }))
-                end
-                delay(0.2)
             end
         end
     end

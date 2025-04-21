@@ -68,69 +68,6 @@ SMODS.Tag{
     end,
 }
 
--- Might come back to this. For now too much trouble to figure out for a tag that probably won't be particularly good
--- SMODS.Tag{
---     key = 'tidallock',
---     atlas = 'tag',
---     pos = { x = 3, y = 0 },
---     discovered = false,
---     --min_ante = 2,
-
---     config = {
---         possible_ranks = { '_A', '_K', '_Q', '_J', '_T', '_9', '_8', '_7', '_6', '_5', '_4', '_3', '_2' },
---         rank_a = nil,
---         rank_b = nil,
---         levels = 3
---     },
-
---     loc_vars = function(self,info_queue,center)
---         return {
---             vars = {
---                 G.GAME.lunar_upgrades[center.ability.rank_a].name,
---                 G.GAME.lunar_upgrades[center.ability.rank_b].name,
---                 center.ability.levels
---             }
---         }
---     end,
-
---     in_pool = function(self, args)
---         return true
---     end,
-
---     apply = function(self, tag, context)
---         if not tag.triggered and context.type == 'immediate' then
---             local lock = tag.ID
---             G.CONTROLLER.locks[lock] = true
---             tag:yep('+', G.C.LUNARALT, function()
---                 G.E_MANAGER:add_event(Event({
---                     trigger = 'after',
---                     delay = 0.4,
---                     func = function()
---                         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[tag.ability.rank_a].name..'s',chips = G.GAME.lunar_upgrades[tag.ability.rank_a].chips, mult = G.GAME.lunar_upgrades[tag.ability.rank_a].mult, level=G.GAME.lunar_upgrades[tag.ability.rank_a].level})
---                         level_up_rank(nil, tag.ability.rank_a, 1)
---                         update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
---                         G.E_MANAGER:add_event(Event({
---                             trigger = 'after',
---                             delay = 0.4,
---                             func = function()
---                                 update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=G.GAME.lunar_upgrades[tag.ability.rank_b].name..'s',chips = G.GAME.lunar_upgrades[tag.ability.rank_b].chips, mult = G.GAME.lunar_upgrades[tag.ability.rank_b].mult, level=G.GAME.lunar_upgrades[tag.ability.rank_b].level})
---                                 level_up_rank(nil, tag.ability.rank_b, 1)
---                                 update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
---                                 return true
---                             end
---                         }))
---                         return true
---                     end
---                 }))
---                 G.CONTROLLER.locks[lock] = nil
---                 return true
---             end)
---             self.triggered = true
---             return true
---         end
---     end
--- }
-
 SMODS.Tag{
     key = 'reversehermit',
     atlas = 'tag',

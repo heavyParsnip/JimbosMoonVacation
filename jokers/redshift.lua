@@ -40,9 +40,9 @@ SMODS.Joker{
             if context.other_card.edition and context.other_card.edition.foil then
                 edition_chips = context.other_card.edition.chips or 0
             end
-            if context.other_card.ability.t_chips and context.other_card.ability.t_chips ~= 0 then
+            if context.other_card.ability and context.other_card.ability.t_chips and context.other_card.ability.t_chips ~= 0 then
                 extra_chips = extra_chips + context.other_card.ability.t_chips
-            elseif context.other_card.ability.extra then
+            elseif context.other_card.ability and context.other_card.ability.extra then
                 if type(context.other_card.ability.extra) == "table" then
                     if context.other_card.ability.extra.chips then
                         extra_chips = extra_chips + context.other_card.ability.extra.chips

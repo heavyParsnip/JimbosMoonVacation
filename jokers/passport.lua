@@ -11,7 +11,7 @@ SMODS.Joker{
     perishable_compat = true,
 
     config = {
-        extra = { seal_tally = 0, xmultiplier = 0.5 }
+        extra = { seal_tally = 0, xmultiplier = 0.25 }
     },
 
     loc_vars = function(self,info_queue,center)

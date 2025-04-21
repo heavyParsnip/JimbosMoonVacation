@@ -623,6 +623,7 @@ end
 
 function Card:get_lunar_chips()
     if self.debuff then return 0 end
+    if self.ability.name == "Stone Card" then return 0 end
     for k, v in pairs(G.GAME.lunar_upgrades) do
         if self.base.value == v.name then
             return v.chips
@@ -633,6 +634,7 @@ end
 
 function Card:get_lunar_mult()
     if self.debuff then return 0 end
+    if self.ability.name == "Stone Card" then return 0 end
     for k, v in pairs(G.GAME.lunar_upgrades) do
         if self.base.value == v.name then
             return v.mult

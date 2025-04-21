@@ -2,8 +2,8 @@ SMODS.Joker{
     key = 'jimboroger',
     atlas = 'jokers',
     pos = {x = 0, y = 0},
-    cost = 6,
-    rarity = 2,
+    cost = 8,
+    rarity = 3,
     unlocked = true,
     discovered = false,
     blueprint_compat = false,
@@ -39,7 +39,6 @@ SMODS.Joker{
                     trigger = 'after',
                     delay = 0.5,
                     func = function()
-                        play_sound('holo1')
                         SMODS.add_booster_to_shop(new_packs[i] or 'shop_pack')
                         card:juice_up(0.3, 0.4)
                         return true
@@ -74,6 +73,7 @@ SMODS.Joker{
                     end
                     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize(msg)})
                     card:juice_up(0.7, 0.7)
+                    play_sound('holo1')
                     return true
                 end
             }))
