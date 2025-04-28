@@ -23,7 +23,7 @@ SMODS.Seal{
     draw = function(self, card, layer)
         G.shared_seals[card.seal].role.draw_major = card
         G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
-        G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, true, card.children.center)
+        G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center)
     end,
 
     calculate = function(self, card, context)
