@@ -10,6 +10,10 @@ SMODS.Joker{
     eternal_compat = true,
     perishable_compat = true,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
+
     calculate = function(self, card, context)
         if context.using_consumeable and context.consumeable.ability.set == 'Planet' and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

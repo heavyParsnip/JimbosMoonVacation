@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'doubletake',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 3, y = 0},
     cost = 8,
     rarity = 2,
     unlocked = true,
@@ -10,9 +10,13 @@ SMODS.Joker{
     eternal_compat = true,
     perishable_compat = true,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
+
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
-            if not (context.other_card:get_id() == 11 or context.other_card:get_id() == 12 or context.other_card:get_id() == 13) then
+            if not context.other_card:is_face() then
                 return {
                     mult = context.other_card.base.nominal,
                 }

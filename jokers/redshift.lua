@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'redshift',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 7, y = 0},
     cost = 9,
     rarity = 3,
     unlocked = true,
@@ -10,6 +10,11 @@ SMODS.Joker{
     eternal_compat = true,
     perishable_compat = true,
 
+    in_pool = function(self, args)
+        return (MOONMOD.content.config.enable_jokers and MOONMOD.content.config.enable_unstable_jokers)
+    end,
+
+    -- This is madness, but I don't expect I'll come up with a more elegant solution.
     calculate = function(self, card, context)
         local edition_chips = 0 -- there's probably a better way to do this
         if context.individual and context.cardarea == G.play then

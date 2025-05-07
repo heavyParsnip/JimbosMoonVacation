@@ -1,21 +1,4 @@
 -- LUNAR CARDS --
-
--- local G.GAME.lunar_upgrades = {
---     _2 = {name = "2", value = G.P_CARDS.H_2.value, level = 1, l_mult = 2, l_chips = 5},
---     _3 = {name = "3", value = G.P_CARDS.H_3.value, level = 1, l_mult = 1, l_chips = 7},
---     _4 = {name = "4", value = G.P_CARDS.H_4.value, level = 1, l_mult = 1, l_chips = 7},
---     _5 = {name = "5", value = G.P_CARDS.H_5.value, level = 1, l_mult = 1, l_chips = 5},
---     _6 = {name = "6", value = G.P_CARDS.H_6.value, level = 1, l_mult = 1, l_chips = 5},
---     _7 = {name = "7", value = G.P_CARDS.H_7.value, level = 1, l_mult = 1, l_chips = 5},
---     _8 = {name = "8", value = G.P_CARDS.H_8.value, level = 1, l_mult = 1, l_chips = 5},
---     _9 = {name = "9", value = G.P_CARDS.H_9.value, level = 1, l_mult = 1, l_chips = 5},
---     _T = {name = "10", value = G.P_CARDS.H_T.value, level = 1, l_mult = 1, l_chips = 5},
---     _J = {name = "Jack", value = G.P_CARDS.H_J.value, level = 1, l_mult = 1, l_chips = 3},
---     _Q = {name = "Queen", value = G.P_CARDS.H_Q.value, level = 1, l_mult = 1, l_chips = 3},
---     _K = {name = "King", value = G.P_CARDS.H_K.value, level = 1, l_mult = 1, l_chips = 3},
---     _A = {name = "Ace", value = G.P_CARDS.H_A.value, level = 1, l_mult = 2, l_chips = 3},
--- }
-
 SMODS.Atlas{
     key = 'lunar',
     path = "Lunar.png",
@@ -25,7 +8,6 @@ SMODS.Atlas{
 
 SMODS.ConsumableType{
     key = 'Lunar',
-
     collection_rows = {6, 7},
     primary_colour = G.C.LUNAR,
     secondary_colour = G.C.LUNAR,
@@ -73,6 +55,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -112,6 +98,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -155,6 +145,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -194,6 +188,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -237,6 +235,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -276,6 +278,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -319,6 +325,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -358,6 +368,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -401,6 +415,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -440,6 +458,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -483,6 +505,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -522,6 +548,10 @@ SMODS.Consumable{
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
+    end,
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     can_use = function(self, card)
@@ -565,6 +595,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -580,45 +614,47 @@ SMODS.Consumable{
     end
 }
 
-function level_up_rank(card, rank, amount)
+function level_up_rank(card, rank, amount, instant)
     amount = amount or 1
+    instant = instant or false
     G.GAME.lunar_upgrades[rank].level = math.max(0, G.GAME.lunar_upgrades[rank].level + amount)
     G.GAME.lunar_upgrades[rank].mult = math.max(G.GAME.lunar_upgrades[rank].s_mult + G.GAME.lunar_upgrades[rank].l_mult*(G.GAME.lunar_upgrades[rank].level - 1), 0)
     G.GAME.lunar_upgrades[rank].chips = math.max(G.GAME.lunar_upgrades[rank].s_chips + G.GAME.lunar_upgrades[rank].l_chips*(G.GAME.lunar_upgrades[rank].level - 1), 0)
-    
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        delay = 0.2,
-        func = function()
-            play_sound('tarot1')
-            if card then card:juice_up(0.8, 0.5) end
-            G.TAROT_INTERRUPT_PULSE = true
-            return true
-        end
-    }))
-    update_hand_text({delay = 0}, {mult = G.GAME.lunar_upgrades[rank].mult, StatusText = true})
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        delay = 0.9, 
-        func = function()
-            play_sound('tarot1')
-            if card then card:juice_up(0.8, 0.5) end
-            return true
-        end
-    }))
-    update_hand_text({delay = 0}, {chips = G.GAME.lunar_upgrades[rank].chips, StatusText = true})
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after', 
-        delay = 0.9, 
-        func = function()
-            play_sound('tarot1')
-            if card then card:juice_up(0.8, 0.5) end
-            G.TAROT_INTERRUPT_PULSE = nil
-            return true
-        end
-    }))
-    update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level=G.GAME.lunar_upgrades[rank].level})
-    delay(1.3)
+    if not instant then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                play_sound('tarot1')
+                if card then card:juice_up(0.8, 0.5) end
+                G.TAROT_INTERRUPT_PULSE = true
+                return true
+            end
+        }))
+        update_hand_text({delay = 0}, {mult = G.GAME.lunar_upgrades[rank].mult, StatusText = true})
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.9, 
+            func = function()
+                play_sound('tarot1')
+                if card then card:juice_up(0.8, 0.5) end
+                return true
+            end
+        }))
+        update_hand_text({delay = 0}, {chips = G.GAME.lunar_upgrades[rank].chips, StatusText = true})
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after', 
+            delay = 0.9, 
+            func = function()
+                play_sound('tarot1')
+                if card then card:juice_up(0.8, 0.5) end
+                G.TAROT_INTERRUPT_PULSE = nil
+                return true
+            end
+        }))
+        update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level=G.GAME.lunar_upgrades[rank].level})
+        delay(1.3)
+    end
 end
 
 function Card:get_lunar_chips()

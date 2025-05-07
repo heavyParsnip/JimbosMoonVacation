@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'passport',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 0, y = 1},
     cost = 7,
     rarity = 2,
     unlocked = true,
@@ -11,16 +11,20 @@ SMODS.Joker{
     perishable_compat = true,
 
     config = {
-        extra = { seal_tally = 0, xmultiplier = 0.25 }
+        extra = { seal_tally = 0, xmult = 0.25 }
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                center.ability.extra.xmultiplier,
-                1+(center.ability.extra.xmultiplier*self.config.extra.seal_tally)
+                center.ability.extra.xmult,
+                1+(center.ability.extra.xmult*self.config.extra.seal_tally)
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
     end,
 
     update = function(self, card, dt)
@@ -35,7 +39,7 @@ SMODS.Joker{
     calculate = function(self, card, context)
         if context.joker_main and self.config.extra.seal_tally > 0 then
             return {
-                x_mult = 1 + (self.config.extra.seal_tally*card.ability.extra.xmultiplier)
+                x_mult = 1 + (self.config.extra.seal_tally*card.ability.extra.xmult)
             }
         end
     end

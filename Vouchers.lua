@@ -14,6 +14,10 @@ SMODS.Voucher{
         extra = 2
     },
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     redeem = function(self, card)
         G.GAME.lunar_rate = G.GAME.lunar_rate*card.ability.extra
     end
@@ -37,18 +41,22 @@ SMODS.Voucher{
     end,
 
     in_pool = function(self, args)
-        return G.GAME.used_vouchers.v_moon_eclipse
+        return (G.GAME.used_vouchers.v_moon_eclipse and MOONMOD.content.config.enable_lunars)
     end
 }
 
 SMODS.Voucher{
     key = 'fortuneflipper',
     atlas = 'voucher',
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 0  },
 
     config = {
         reverse_rate = 2
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     redeem = function(self, card)
         G.GAME.reverse_rate = card.ability.reverse_rate
@@ -58,10 +66,10 @@ SMODS.Voucher{
 SMODS.Voucher{
     key = 'twistoffate',
     atlas = 'voucher',
-    pos = { x = 1, y = 0 },
+    pos = { x = 0, y = 1 },
 
     in_pool = function(self, args)
-        return G.GAME.used_vouchers.v_moon_fortuneflipper
+        return (G.GAME.used_vouchers.v_moon_fortuneflipper and MOONMOD.content.config.enable_reverses)
     end,
 
     calculate = function(self, card, context)
@@ -133,21 +141,12 @@ SMODS.Voucher{
                             }))
                         end
                         ),
-                        --delay = 1.0,
                         focus = context.consumeable,
                         message = localize('k_flipped'),
                         colour = G.C.REVERSE,
-                        --card = context.consumeable
                     }
                 }
             end
-
-            
-            
         end
-    end,
-
-    redeem = function(self, card)
-        
     end
 }

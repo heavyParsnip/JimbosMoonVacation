@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'saltnpepper',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 3, y = 1},
     cost = 5,
     rarity = 1,
     unlocked = true,
@@ -23,6 +23,10 @@ SMODS.Joker{
                 center.ability.extra.mult
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
     end,
 
     calculate = function(self, card, context)

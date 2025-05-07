@@ -31,6 +31,10 @@ SMODS.Booster{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     particles = function(self)
         init_reverse_particles()
     end,
@@ -70,6 +74,10 @@ SMODS.Booster{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     particles = function(self)
         init_reverse_particles()
     end,
@@ -98,6 +106,10 @@ SMODS.Booster{
         extra = 5,
         choose = 1,
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     particles = function(self)
         init_reverse_particles()
@@ -147,6 +159,10 @@ SMODS.Booster{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     particles = function(self)
         init_reverse_particles()
     end,
@@ -160,7 +176,6 @@ SMODS.Booster{
     end
 
 }
-
 
 SMODS.Booster{
     key = 'lunar_normal_1',
@@ -184,6 +199,10 @@ SMODS.Booster{
                 center.ability.extra
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     particles = function(self)
@@ -221,6 +240,10 @@ SMODS.Booster{
                 center.ability.extra
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     particles = function(self)
@@ -261,6 +284,10 @@ SMODS.Booster{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_lunars
+    end,
+
     particles = function(self)
         init_lunar_particles()
     end,
@@ -297,6 +324,10 @@ SMODS.Booster{
                 center.ability.extra
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_lunars
     end,
 
     particles = function(self)

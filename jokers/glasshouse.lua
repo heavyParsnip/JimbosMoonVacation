@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'glasshouse',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 6, y = 0},
     cost = 6,
     rarity = 2,
     unlocked = true,
@@ -13,6 +13,10 @@ SMODS.Joker{
     config = {
         extra = { retriggers = 1 }
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then

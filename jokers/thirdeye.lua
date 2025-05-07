@@ -23,6 +23,10 @@ SMODS.Joker{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
+
     calculate = function(self, card, context)
         if context.consumeable and context.consumeable.ability.set == "Tarot" and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             if pseudorandom('thirdeye') < G.GAME.probabilities.normal/card.ability.extra.chance then

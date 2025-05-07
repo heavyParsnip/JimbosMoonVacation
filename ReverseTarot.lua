@@ -8,7 +8,6 @@ SMODS.Atlas{
 
 SMODS.ConsumableType{
     key = 'Reverse',
-
     collection_rows = {5, 6},
     primary_colour = G.C.REVERSE,
     secondary_colour = G.C.REVERSE,
@@ -56,6 +55,10 @@ SMODS.Consumable{
             info_queue[#info_queue+1] = rfool_c
         end
         return { main_end = main_end }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
     end,
 
     can_use = function(self, card)
@@ -107,6 +110,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -138,6 +145,10 @@ SMODS.Consumable{
                 self.config.moons
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
     end,
 
     can_use = function(self, card)
@@ -189,6 +200,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -220,6 +235,10 @@ SMODS.Consumable{
                 center.ability.reverses
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
     end,
 
     can_use = function(self, card)
@@ -272,6 +291,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -304,11 +327,12 @@ SMODS.Consumable{
                 center.ability.extra,
                 1+G.GAME.reverse_upgrades.wild,
                 1+center.ability.extra+G.GAME.reverse_upgrades.wild
-                -- old effect
-                -- 1.0+(G.GAME.reverse_upgrades.wild*0.5),
-                -- 1.5+(G.GAME.reverse_upgrades.wild*0.5)
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
     end,
 
     can_use = function(self, card)
@@ -347,6 +371,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -383,6 +411,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -404,6 +436,10 @@ SMODS.Consumable{
     cost = 4,
     extra_value = 1,
     consumeable = true,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     can_use = function(self, card)
         return true
@@ -489,6 +525,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         for k, v in pairs(G.jokers.cards) do
            if v.ability.set == 'Joker' and (not v.edition) then return true end
@@ -572,6 +612,10 @@ SMODS.Consumable{
                 center.ability.max_highlighted
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
     end,
 
     can_use = function(self, card)
@@ -724,6 +768,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return #G.hand.highlighted == card.ability.need_highlighted
     end,
@@ -801,6 +849,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     update = function(self, card, dt)
         self.config.money_penalty = 0
         for k, v in pairs(G.GAME.consumeable_usage) do
@@ -872,6 +924,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -908,6 +964,10 @@ SMODS.Consumable{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         return true
     end,
@@ -932,6 +992,10 @@ SMODS.Consumable{
     config = {
         consumeable = true
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     can_use = function(self, card)
         local has_diamonds = false
@@ -996,6 +1060,10 @@ SMODS.Consumable{
         consumeable = true
     },
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
+
     can_use = function(self, card)
         local has_clubs = false
         
@@ -1058,6 +1126,10 @@ SMODS.Consumable{
     config = {
         consumeable = true
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     can_use = function(self, card)
         local has_hearts = false
@@ -1122,6 +1194,10 @@ SMODS.Consumable{
     config = {
         max_highlighted = 1
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     can_use = function(self, card)
         return #G.jokers.highlighted == card.ability.max_highlighted
@@ -1196,6 +1272,10 @@ SMODS.Consumable{
     config = {
         consumeable = true
     },
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_reverses
+    end,
 
     can_use = function(self, card)
         local has_spades = false

@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'emergencyexit',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 4, y = 0},
     cost = 3,
     rarity = 1,
     unlocked = true,
@@ -20,6 +20,10 @@ SMODS.Joker{
                 card.ability.extra.bonus_discards
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
     end,
 
     calculate = function(self, card, context)

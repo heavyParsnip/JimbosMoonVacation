@@ -23,6 +23,10 @@ SMODS.Joker{
         }
     end,
 
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
+
     set_ability = function(self, card, initial, delay_sprites)
         card.ability.extra.bomb_rounds = 0
         card.ability.extra.max_rounds = 1

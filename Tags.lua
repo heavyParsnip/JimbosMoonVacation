@@ -13,7 +13,7 @@ SMODS.Tag{
     discovered = false,
 
     in_pool = function(self, args)
-        return true
+        return MOONMOD.content.config.enable_lunars
     end,
 
     apply = function(self, tag, context)
@@ -44,7 +44,7 @@ SMODS.Tag{
     discovered = false,
 
     in_pool = function(self, args)
-        return true
+        return MOONMOD.content.config.enable_reverses
     end,
     
     apply = function(self, tag, context)

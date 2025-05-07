@@ -12,10 +12,7 @@ SMODS.Seal{
     pos = { x = 0, y = 0 },
     badge_colour = HEX('C0C0C0'),
     discovered = false,
-    config = {
-        last_played_silvers = {}
-    },
-
+    
     loc_txt = {
         label = "Silver Seal"
     },

@@ -15,6 +15,10 @@ SMODS.Blind{
     boss = { min = 3, max = 10 },
     boss_colour = HEX('486089'),
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     calculate = function(self, blind, context)
         if not blind.disabled then
             if context.individual and context.cardarea == G.play then
@@ -43,10 +47,15 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 5, max = 10 },
     boss_colour = HEX('d14f09'),
+
     config = {
         armed = true,
         ready = false
     },
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     disable = function(self)
         self.armed = false
@@ -93,6 +102,10 @@ SMODS.Blind{
         prepped = false
     },
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     disable = function(self)
         for i = 1, #G.hand.cards do
             if G.hand.cards[i].facing == 'back' then
@@ -132,30 +145,8 @@ SMODS.Blind{
     boss = { min = 1, max = 10 },
     boss_colour = HEX('bddec5'),
 
-    press_play = function(self)
-        -- for i = 1, #G.play.cards do
-        --     local percent = 1.15 - (i-0.999)/(#G.play.cards-0.998)*0.3
-        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.play.cards[i]:flip();play_sound('card1', percent);G.play.cards[i]:juice_up(0.2, 0.2);return true end }))
-        -- end
-        -- delay(0.2)
-        -- for i = 1, #G.play.cards do
-        --     if G.play.cards[i].ability.effect == 'Stone Card' or G.play.cards[i].debuff then return end
-        --     local suit = G.play.cards[i].base.suit
-        --     if suit == 'Spades' then
-        --         suit = 'Clubs'
-        --     elseif suit == 'Clubs' then
-        --         suit = 'Spades'
-        --     elseif suit == 'Hearts' then
-        --         suit = 'Diamonds'
-        --     elseif suit == 'Diamonds' then
-        --         suit = 'Hearts'
-        --     end
-        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.play.cards[i]:change_suit(suit);return true end }))
-        -- end
-        -- for i = 1, #G.play.cards do
-        --     local percent = 0.85 + (i-0.999)/(#G.play.cards-0.998)*0.3
-        --     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.play.cards[i]:flip();play_sound('tarot2', percent, 0.6);G.play.cards[i]:juice_up(0.2, 0.2);return true end }))
-        -- end
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
     end,
 
     calculate = function(self, blind, context)
@@ -196,6 +187,10 @@ SMODS.Blind{
     boss = { min = 3, max = 10 },
     boss_colour = HEX('4e3a75'),
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -220,6 +215,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 3, max = 10 },
     boss_colour = HEX('a9a9a7'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
@@ -260,6 +259,10 @@ SMODS.Blind{
     boss = { min = 3, max = 10 },
     boss_colour = HEX('dab896'),
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -288,6 +291,10 @@ SMODS.Blind{
     boss = { min = 3, max = 10 },
     boss_colour = HEX('76a5af'),
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -313,6 +320,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 2, max = 10 },
     boss_colour = HEX('457430'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
@@ -356,8 +367,12 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 9 },
     mult = 2,
-    boss = { min = 3, max = 10 },
+    boss = { min = 5, max = 10 },
     boss_colour = HEX('705a36'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
@@ -419,6 +434,10 @@ SMODS.Blind{
 --     boss = { min = 1, max = 10 },
 --     boss_colour = HEX('d8ae6a'),
 
+--     in_pool = function(self)
+--         return MOONMOD.content.config.enable_blinds
+--     end,
+
 --     disable = function(self)
 
 --     end,
@@ -436,6 +455,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 1, max = 10 },
     boss_colour = HEX('DBA5C0'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
@@ -465,6 +488,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 3, max = 10 },
     boss_colour = HEX('9a8c4e'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
  
     calculate = function(self, blind, context)
         if context.discard and not blind.disabled then
@@ -488,6 +515,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 8, max = 10, showdown = true },
     boss_colour = HEX('a2a9bd'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
@@ -521,8 +552,11 @@ SMODS.Blind{
     boss = { min = 8, max = 10, showdown = true },
     boss_colour = HEX('B87333'),
 
-    calculate = function(self, blind, context)
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
+    calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
             ease_dollars(2)
             mult = mult - (G.GAME.dollars + (G.GAME.dollar_buffer or 0))
@@ -545,6 +579,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 8, max = 10, showdown = true },
     boss_colour = HEX('cea11b'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
@@ -583,6 +621,10 @@ SMODS.Blind{
     boss = { min = 8, max = 10, showdown = true },
     boss_colour = HEX('e60072'),
 
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
+
     modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
         return 1, 1, true
     end
@@ -595,6 +637,10 @@ SMODS.Blind{
     mult = 2,
     boss = { min = 8, max = 10, showdown = true },
     boss_colour = HEX('e0d49d'),
+
+    in_pool = function(self)
+        return MOONMOD.content.config.enable_blinds
+    end,
 
     disable = function(self)
         for k, v in pairs(G.playing_cards) do

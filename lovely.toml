@@ -242,22 +242,7 @@ pattern = '''elseif _c.effect == 'Stone Card' then loc_vars = \{\(\(specific_var
 position = 'after'
 payload = '''+(G.GAME.reverse_upgrades.stone)'''
 
-# Reverse lovers upgrades (placeholder effect)
-# [[patches]]
-# [patches.pattern]
-# target = "card.lua"
-# pattern = '''
-#     local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)
-# '''
-# position = 'after'
-# match_indent = true
-# payload = '''
-# if self.ability.effect == "Wild Card" then
-#     ret = ret + (G.GAME.reverse_upgrades.wild)
-# end
-# '''
-
-# Reverse lovers upgrades for realsies
+# Reverse lovers upgrades, new implementation
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -299,13 +284,6 @@ payload = '''
     },
 '''
 
-# [[patches]]
-# [patches.regex]
-# target = "functions/common_events.lua"
-# pattern = '''local chips = card:get_chip_bonus\(\)'''
-# position = 'after'
-# payload = ''' + card:get_lunar_chips()'''
-
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -321,13 +299,6 @@ pattern = '''return self.base.nominal + self.ability.bonus + (self.ability.perma
 position = 'at'
 match_indent = true
 payload = '''return self.base.nominal + self.ability.bonus + (self.ability.perma_bonus or 0) + self:get_lunar_chips() '''
-
-# [[patches]]
-# [patches.regex]
-# target = "functions/common_events.lua"
-# pattern = '''local mult = card:get_chip_mult\(\)'''
-# position = 'after'
-# payload = ''' + card:get_lunar_mult()'''
 
 [[patches]]
 [patches.pattern]

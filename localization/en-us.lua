@@ -500,11 +500,16 @@ return {
             j_moon_roulandus = {
                 name = "Roulandus",
                 text = {
-                    "Add {C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
-                    "and {X:mult,C:white} X#3# {} Mult to your",
-                    "hand after every {C:attention}12th{}",
-                    "card scored",
-                    "{C:inactive}(#4# remaining)"
+                    "This Joker gains {C:chips}+#1#{} Chips,",
+                    "{C:mult}+#2#{} Mult, and {X:mult,C:white} X#3# {} Mult",
+                    "after every {C:attention}#4#th{} card scored",
+                    "{C:inactive}(#5# remaining) {C:inactive}(Currently {C:chips}+#6#{C:inactive} Chips,",
+                    "{C:mult}+#7#{C:inactive} Mult, and {X:mult,C:white} X#8# {C:inactive} Mult)"
+                },
+                unlock = {
+                    "Find this Joker",
+                    "from the {C:spectral}Soul{} card...",
+                    "...or maybe another way?"
                 }
             },
             j_moon_sagenpaprika = {
@@ -788,9 +793,8 @@ return {
                 name = "Silver Seal",
                 text = {
                     "Creates the {C:lunaralt}Lunar{} card for",
-                    "this card's rank at the",
-                    "end of a round if {C:attention}held{}",
-                    "in hand",
+                    "this card's rank at the end",
+                    "of a round if {C:attention}held{} in hand",
                     "{C:inactive}(Must have room){}"
                 }
             },
@@ -824,7 +828,8 @@ return {
             k_timebombready = "Ready to blow!",
             k_timebombboom = "KABOOOOOOM!!",
             k_torched = "Torched!",
-            k_taxed = "-#1# Chips"
+            k_taxed = "-#1# Chips",
+            k_all_ranks = 'All Ranks'
         }
     }
 }

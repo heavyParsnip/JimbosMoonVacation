@@ -1,7 +1,7 @@
 SMODS.Joker{
     key = 'freezetag',
     atlas = 'jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 5, y = 0},
     cost = 4,
     rarity = 1,
     unlocked = true,
@@ -9,6 +9,10 @@ SMODS.Joker{
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+
+    in_pool = function(self, args)
+        return MOONMOD.content.config.enable_jokers
+    end,
 
     calculate = function(self, card, context)
         if context.skip_blind then
