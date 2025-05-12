@@ -21,10 +21,10 @@ Are Lunar Cards diluting your shop pool? Have a different Reverse Tarot Card mod
 *Look no further!* JMV is fully configurable; you can turn off individual features as you like from the mod config menu. Happy configuring!
 
 # Installation Guide
-Requires `lovely-0.7.1` and `steamodded-1.0.0~BETA~0509c` or newer!
+Requires `lovely-0.7.1` and `steamodded-1.0.0~BETA~0509c` or newer
 *Get them here:*
-[link](https://github.com/Steamodded/smods/wiki)
-[link](https://github.com/ethangreen-dev/lovely-injector)
+[smods](https://github.com/Steamodded/smods/wiki)
+[lovely](https://github.com/ethangreen-dev/lovely-injector)
 
 The latest stable version of JMV can be found at [link](https://github.com/heavyParsnip/JimbosMoonVacation/releases/latest). Just unzip it to your mod directory!
 
