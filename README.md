@@ -38,3 +38,6 @@ Yes! I have more ideas for Jokers I want to add, but I'm abysmally slow at makin
 - [NeatoJokers by NeatoQueen & co.](https://github.com/neatoqueen/NeatoJokers)
 - [Bunco by Firch & co.](https://github.com/Firch/Bunco)
 - [KCVanilla by krackocloud & co.](https://github.com/kcgidw/kcvanilla)
+
+# License
+Licensed under GNU GPLv3
