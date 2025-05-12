@@ -26,7 +26,7 @@ Requires `lovely-0.7.1` and `steamodded-1.0.0~BETA~0509c` or newer
 [smods](https://github.com/Steamodded/smods/wiki)
 [lovely](https://github.com/ethangreen-dev/lovely-injector)
 
-The latest stable version of JMV can be found at [link](https://github.com/heavyParsnip/JimbosMoonVacation/releases/latest). Just unzip it to your mod directory!
+The latest stable version of JMV can be found [here](https://github.com/heavyParsnip/JimbosMoonVacation/releases/latest). Just unzip it to your mod directory!
 
 ## Who made this confounded mod, anyway?
 idk
