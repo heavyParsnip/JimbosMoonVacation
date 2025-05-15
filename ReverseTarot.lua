@@ -802,7 +802,7 @@ SMODS.Consumable{
                 func = function()
                     if G.hand.highlighted[i] ~= rightmost then
                         old_rank = G.hand.highlighted[i].base.value
-                        old_suit = G.hand.highlighted[i].base.old_suit
+                        old_suit = G.hand.highlighted[i].base.suit
                         copy_card(rightmost, G.hand.highlighted[i])
                         SMODS.change_base(G.hand.highlighted[i], old_suit, old_rank)
                     end
