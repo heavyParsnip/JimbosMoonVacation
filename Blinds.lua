@@ -16,9 +16,9 @@ SMODS.Blind{
     boss_colour = HEX('486089'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     calculate = function(self, blind, context)
         if not blind.disabled then
             if context.individual and context.cardarea == G.play then
@@ -54,7 +54,7 @@ SMODS.Blind{
     },
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
 
     disable = function(self)
@@ -103,7 +103,7 @@ SMODS.Blind{
     },
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
 
     disable = function(self)
@@ -146,9 +146,9 @@ SMODS.Blind{
     boss_colour = HEX('bddec5'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
             blind:wiggle()
@@ -188,9 +188,9 @@ SMODS.Blind{
     boss_colour = HEX('4e3a75'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -217,9 +217,9 @@ SMODS.Blind{
     boss_colour = HEX('a9a9a7'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
             if pseudorandom(pseudoseed('boulder')) < G.GAME.probabilities.normal/2 then
@@ -260,9 +260,9 @@ SMODS.Blind{
     boss_colour = HEX('dab896'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -292,9 +292,9 @@ SMODS.Blind{
     boss_colour = HEX('76a5af'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -322,9 +322,9 @@ SMODS.Blind{
     boss_colour = HEX('457430'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -371,9 +371,9 @@ SMODS.Blind{
     boss_colour = HEX('705a36'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
             blind:wiggle()
@@ -435,7 +435,7 @@ SMODS.Blind{
 --     boss_colour = HEX('d8ae6a'),
 
 --     in_pool = function(self)
---         return MOONMOD.content.config.enable_blinds
+--         return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
 --     end,
 
 --     disable = function(self)
@@ -457,9 +457,9 @@ SMODS.Blind{
     boss_colour = HEX('DBA5C0'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -490,9 +490,9 @@ SMODS.Blind{
     boss_colour = HEX('9a8c4e'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
- 
+     
     calculate = function(self, blind, context)
         if context.discard and not blind.disabled then
             G.E_MANAGER:add_event(Event({
@@ -517,9 +517,9 @@ SMODS.Blind{
     boss_colour = HEX('a2a9bd'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante % 8 == 0 and MOONMOD.content.config.enable_blinds
     end,
-
+    
     calculate = function(self, blind, context)
         if context.before and not blind.disabled then
             local enhanced_cards = {}
@@ -553,9 +553,10 @@ SMODS.Blind{
     boss_colour = HEX('B87333'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante % 8 == 0 and MOONMOD.content.config.enable_blinds
     end,
 
+    
     calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
             ease_dollars(2)
@@ -581,9 +582,9 @@ SMODS.Blind{
     boss_colour = HEX('cea11b'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante % 8 == 0 and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false
@@ -622,9 +623,9 @@ SMODS.Blind{
     boss_colour = HEX('e60072'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante % 8 == 0 and MOONMOD.content.config.enable_blinds
     end,
-
+    
     modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
         return 1, 1, true
     end
@@ -639,9 +640,9 @@ SMODS.Blind{
     boss_colour = HEX('e0d49d'),
 
     in_pool = function(self)
-        return MOONMOD.content.config.enable_blinds
+        return G.GAME.round_resets.ante % 8 == 0 and MOONMOD.content.config.enable_blinds
     end,
-
+    
     disable = function(self)
         for k, v in pairs(G.playing_cards) do
             v.debuff = false

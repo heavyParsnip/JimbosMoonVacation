@@ -13,6 +13,7 @@ SMODS.Atlas {
 }
 
 MOONMOD = {vars = {}, funcs = {}, content = SMODS.current_mod}
+local config = MOONMOD.content.config
 
 -- store mod config
 function MOONMOD.content.save_config(self)

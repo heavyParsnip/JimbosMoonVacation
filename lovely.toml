@@ -163,7 +163,7 @@ payload = '''+(G.GAME.reverse_upgrades.bonus)'''
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "local ret = SMODS.multiplicative_stacking(self.ability.h_x_mult or 1, self.ability.perma_h_x_mult or 0)"
+pattern = "local ret = SMODS.multiplicative_stacking(self.ability.h_x_mult or 1, (not self.ability.extra_enhancement and self.ability.perma_h_x_mult) or 0)"
 position = 'after'
 match_indent = true
 payload = '''
@@ -183,7 +183,7 @@ payload = '''(G.GAME.reverse_upgrades.steel)+'''
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, self.ability.perma_x_mult or 0)'''
+pattern = '''local ret = SMODS.multiplicative_stacking(self.ability.x_mult or 1, (not self.ability.extra_enhancement and self.ability.perma_x_mult) or 0)'''
 position = 'after'
 match_indent = true
 payload = '''
@@ -204,7 +204,7 @@ payload = '''(G.GAME.reverse_upgrades.glass)+'''
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-    local ret = (self.ability.h_dollars or 0) + (self.ability.perma_h_dollars or 0)
+    local ret = (self.ability.h_dollars or 0) + ((not self.ability.extra_enhancement and self.ability.perma_h_dollars) or 0)
 '''
 position = 'after'
 match_indent = true
@@ -303,7 +303,7 @@ payload = '''return self.base.nominal + self.ability.bonus + (self.ability.perma
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''local ret = self.ability.perma_mult or 0'''
+pattern = '''local ret = (not self.ability.extra_enhancement and self.ability.perma_mult) or 0'''
 position = 'after'
 match_indent = true
 payload = '''ret = ret + self:get_lunar_mult()'''

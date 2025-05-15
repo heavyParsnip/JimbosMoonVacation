@@ -11,7 +11,7 @@ SMODS.ConsumableType{
     collection_rows = {6, 7},
     primary_colour = G.C.LUNAR,
     secondary_colour = G.C.LUNAR,
-    shop_rate = 3.5,
+    shop_rate = 2,
 
     loc_txt = {
         collection = 'Lunar Cards',
