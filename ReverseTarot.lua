@@ -460,6 +460,7 @@ SMODS.Consumable{
                 delay = 0.4,
                 func = function()
                     voucher.ability.couponed = true
+                    voucher.cost = 0
                     voucher:set_cost()
                     card:juice_up(0.3, 0.5)
                     play_sound('timpani')

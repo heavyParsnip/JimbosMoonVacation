@@ -13,7 +13,7 @@ SMODS.Booster{
     pos = {x = 0, y = 0},
     discovered = false,
     cost = 4,
-    weight = 0.35,
+    weight = 0.4,
     draw_hand = true,
     kind = 'Reverse',
 
@@ -56,7 +56,7 @@ SMODS.Booster{
     pos = {x = 1, y = 0},
     discovered = false,
     cost = 4,
-    weight = 0.35,
+    weight = 0.4,
     draw_hand = true,
     kind = 'Reverse',
 
@@ -98,7 +98,7 @@ SMODS.Booster{
     pos = {x = 2, y = 0},
     discovered = false,
     cost = 6,
-    weight = 0.35,
+    weight = 0.4,
     draw_hand = true,
     kind = 'Reverse',
 

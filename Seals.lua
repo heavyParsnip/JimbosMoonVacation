@@ -94,7 +94,7 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.pre_discard then
             for k,v in pairs(G.hand.highlighted) do
-                if v.seal == card.seal then
+                if v.seal == card.seal and v == card then
                     if not card.debuff then
                         local tarots = {}
         

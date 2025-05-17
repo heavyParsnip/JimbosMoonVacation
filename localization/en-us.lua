@@ -597,7 +597,7 @@ return {
             bl_moon_boulder={
                 name="The Boulder",
                 text={
-                    "1 in 2 scored cards add",
+                    "1 in #1# scored cards add",
                     "a Stone Card to your hand",
                 },
             },

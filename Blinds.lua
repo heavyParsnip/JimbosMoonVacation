@@ -45,7 +45,7 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 1 },
     mult = 2,
-    boss = { min = 5, max = 10 },
+    boss = { min = 6, max = 10 },
     boss_colour = HEX('d14f09'),
 
     config = {
@@ -76,6 +76,7 @@ SMODS.Blind{
                         remove = true,
                         colour = G.C.FILTER,
                         delay = 0.45,
+                        focus = context.destroy_card
                     }
                 elseif context.cardarea == 'unscored' then -- need a separate check for the unscored. putting them in the same conditional retriggers the message for some reason
                     return { 
@@ -83,6 +84,7 @@ SMODS.Blind{
                         remove = true,
                         colour = G.C.FILTER,
                         delay = 0.45,
+                        focus = context.destroy_card
                     }
                 end
             end
@@ -213,8 +215,21 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 5 },
     mult = 2,
-    boss = { min = 3, max = 10 },
+    boss = { min = 4, max = 10 },
     boss_colour = HEX('a9a9a7'),
+
+    config = {
+        extra = { chance = 3 }
+    },
+
+    loc_vars = function(self,info_queue,center)
+        return {
+            vars = {
+                canter.ability.extra.chance
+            }
+        }
+    end,
+
 
     in_pool = function(self)
         return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
@@ -222,7 +237,7 @@ SMODS.Blind{
     
     calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
-            if pseudorandom(pseudoseed('boulder')) < G.GAME.probabilities.normal/2 then
+            if pseudorandom(pseudoseed('boulder')) < G.GAME.probabilities.normal/self.config.chance then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         local front = pseudorandom_element(G.P_CARDS, pseudoseed('boulder'))
@@ -240,7 +255,7 @@ SMODS.Blind{
                 }))
                 return {
                     extra = {
-                        focus = card,
+                        focus = context.other_card,
                         message = localize('k_plus_stone'),
                         colour = G.C.SECONDARY_SET.Enhanced
                     },
@@ -426,34 +441,12 @@ SMODS.Blind{
     end
 }
 
--- SMODS.Blind{
---     key = "sands",
---     atlas = "blinds",
---     pos = { x = 0, y = 10 },
---     mult = 2,
---     boss = { min = 1, max = 10 },
---     boss_colour = HEX('d8ae6a'),
-
---     in_pool = function(self)
---         return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
---     end,
-
---     disable = function(self)
-
---     end,
-
---     calculate = function(self, blind, context)
-
---     end
-
--- }
-
 SMODS.Blind{
     key = "lens",
     atlas = "blinds",
     pos = { x = 0, y = 11 },
     mult = 2,
-    boss = { min = 1, max = 10 },
+    boss = { min = 2, max = 10 },
     boss_colour = HEX('DBA5C0'),
 
     in_pool = function(self)
