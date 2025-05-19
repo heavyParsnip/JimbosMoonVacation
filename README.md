@@ -17,8 +17,8 @@ Designed to blend as smoothly as possible with vanilla Balatro, building off of 
   - 5 Finisher Blinds to both challenge you and test your patience
 
 # Configurable!
-Are Lunar Cards diluting your shop pool? Have a different Reverse Tarot Card mod you like better? Blinds pissing you off? or do you simply hate the Jokers I toiled to balance and floundered to draw art for?
-*Look no further!* JMV is fully configurable; you can turn off individual features as you like from the mod config menu. Happy configuring!
+Are Lunar Cards diluting your shop pool? Have a different Reverse Tarot Card mod you like better? Blinds pissing you off? Hate my Jokers?
+*Fear not...* JMV is fully configurable. You can turn off individual features as you like from the mod config menu. Happy configuring!
 
 # Installation Guide
 Requires `lovely-0.7.1` and `steamodded-1.0.0~BETA~0509c` or newer
@@ -32,7 +32,7 @@ The latest stable version of JMV can be found [here](https://github.com/heavyPar
 idk
 
 ## Any plans for more?
-Yes! I have more ideas for Jokers I want to add, but I'm abysmally slow at making the art.
+Yes! I have more ideas for Jokers I want to add, but I'm abysmally slow at making the art. Stay tuned for new additions.
 
 ## Check out some of the other mods that inspired this one
 - [NeatoJokers by NeatoQueen & co.](https://github.com/neatoqueen/NeatoJokers)

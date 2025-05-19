@@ -222,10 +222,10 @@ SMODS.Blind{
         extra = { chance = 3 }
     },
 
-    loc_vars = function(self,info_queue,center)
+    loc_vars = function(self)
         return {
             vars = {
-                canter.ability.extra.chance
+                self.config.extra.chance
             }
         }
     end,
@@ -237,7 +237,7 @@ SMODS.Blind{
     
     calculate = function(self, blind, context)
         if context.individual and context.cardarea == G.play and not blind.disabled then
-            if pseudorandom(pseudoseed('boulder')) < G.GAME.probabilities.normal/self.config.chance then
+            if pseudorandom(pseudoseed('boulder')) < G.GAME.probabilities.normal/self.config.extra.chance then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         local front = pseudorandom_element(G.P_CARDS, pseudoseed('boulder'))
@@ -479,7 +479,7 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 12 },
     mult = 2,
-    boss = { min = 3, max = 10 },
+    boss = { min = 4, max = 10 },
     boss_colour = HEX('9a8c4e'),
 
     in_pool = function(self)

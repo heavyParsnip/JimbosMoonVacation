@@ -94,8 +94,7 @@ SMODS.Tag{
                     trigger = 'after',
                     delay = 0.1,
                     func = function()
-                        voucher.ability.couponed = true
-                        voucher:set_cost()
+                        voucher.cost = 0
                         voucher:juice_up(0.3, 0.5)
                         play_sound('timpani')
                         return true
