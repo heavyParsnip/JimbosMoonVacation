@@ -24,7 +24,7 @@ SMODS.Seal{
     end,
 
     calculate = function(self, card, context)
-        if context.playing_card_end_of_round and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if context.playing_card_end_of_round and context.cardarea == G.hand and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             local this_rank = card:get_id()
             local lunar_key = nil

@@ -220,16 +220,16 @@ SMODS.Consumable{
     consumeable = true,
 
     config = {
-        rank = '_T'
+        rank = '_1'
     },
 
     loc_vars = function(self,info_queue,center)
         return {
             vars = {
-                G.GAME.lunar_upgrades._T.level,
-                G.GAME.lunar_upgrades._T.value,
-                G.GAME.lunar_upgrades._T.l_mult,
-                G.GAME.lunar_upgrades._T.l_chips,
+                G.GAME.lunar_upgrades._1.level,
+                G.GAME.lunar_upgrades._1.value,
+                G.GAME.lunar_upgrades._1.l_mult,
+                G.GAME.lunar_upgrades._1.l_chips,
                 colours = {(G.GAME.lunar_upgrades[self.config.rank].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.lunar_upgrades[self.config.rank].level)])}
             }
         }
@@ -682,7 +682,7 @@ end
 function Card:check_asteroidbelt_bonus(self, card, context)
     if not G.GAME.used_vouchers.v_moon_asteroidbelt or card.ability.debuff then return nil
     elseif context.individual and context.cardarea == G.play then
-        if context.other_card.base.id == tonumber(string.sub(card.ability.rank, 2, 2)) then
+        if string.sub(context.other_card.base.value, 1, 1) == string.sub(card.ability.rank, 2, 2) then
             return {
                 focus = card,
                 message = localize{type = 'variable', key = 'a_xmult', vars = {G.P_CENTERS.v_moon_asteroidbelt.config.extra}},

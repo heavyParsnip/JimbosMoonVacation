@@ -19,7 +19,7 @@ SMODS.Joker{
     end,
 
     calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play then
+        if context.repetition then
             if context.other_card.ability.name == "Stone Card" or context.other_card.ability.name == "Glass Card" then
                 return {
                     message = localize('k_again_ex'),

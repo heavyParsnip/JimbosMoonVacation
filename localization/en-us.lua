@@ -459,8 +459,8 @@ return {
                 name = "Glass House",
                 text = {
                     "Retrigger all",
-                    "played {C:attention}Stone Cards{}",
-                    "and {C:attention}Glass Cards{}"
+                    "{C:attention}Stone Cards{} and",
+                    "{C:attention}Glass Cards{}"
                 }
             },
             j_moon_jimboroger = {

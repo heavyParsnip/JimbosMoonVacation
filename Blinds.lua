@@ -12,7 +12,7 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 0 },
     mult = 2,
-    boss = { min = 3, max = 10 },
+    boss = { min = 4, max = 10 },
     boss_colour = HEX('486089'),
 
     in_pool = function(self)
@@ -160,7 +160,6 @@ SMODS.Blind{
             end
             delay(0.2)
             for i = 1, #G.play.cards do
-                if G.play.cards[i].ability.effect == 'Stone Card' or G.play.cards[i].debuff then return end
                 local suit = G.play.cards[i].base.suit
                 if suit == 'Spades' then
                     suit = 'Clubs'
@@ -298,42 +297,14 @@ SMODS.Blind{
     
 }
 
-SMODS.Blind{
-    key = "slab",
-    atlas = "blinds",
-    pos = { x = 0, y = 7 },
-    mult = 2,
-    boss = { min = 3, max = 10 },
-    boss_colour = HEX('76a5af'),
 
-    in_pool = function(self)
-        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
-    end,
-    
-    disable = function(self)
-        for k, v in pairs(G.playing_cards) do
-            v.debuff = false
-        end
-    end,
-
-    calculate = function(self, blind, context)
-        if context.setting_blind and not blind.disabled then
-            for k, v in pairs(G.playing_cards) do
-                if not v.ability.played_this_ante then
-                    v.debuff = true
-                end
-            end
-        end
-    end
-
-}
 
 SMODS.Blind{
     key = "nose",
     atlas = "blinds",
     pos = { x = 0, y = 8 },
     mult = 2,
-    boss = { min = 2, max = 10 },
+    boss = { min = 3, max = 10 },
     boss_colour = HEX('457430'),
 
     in_pool = function(self)
@@ -382,7 +353,7 @@ SMODS.Blind{
     atlas = "blinds",
     pos = { x = 0, y = 9 },
     mult = 2,
-    boss = { min = 5, max = 10 },
+    boss = { min = 6, max = 10 },
     boss_colour = HEX('705a36'),
 
     in_pool = function(self)
