@@ -297,7 +297,34 @@ SMODS.Blind{
     
 }
 
+SMODS.Blind{
+    key = "slab",
+    atlas = "blinds",
+    pos = { x = 0, y = 7 },
+    mult = 2,
+    boss = { min = 4, max = 10 },
+    boss_colour = HEX('76a5af'),
 
+    in_pool = function(self)
+        return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
+    end,
+    
+    disable = function(self)
+        for k, v in pairs(G.playing_cards) do
+            v.debuff = false
+        end
+    end,
+
+    calculate = function(self, blind, context)
+        if context.setting_blind and not blind.disabled then
+            for k, v in pairs(G.playing_cards) do
+                if not v.ability.played_this_ante then
+                    v.debuff = true
+                end
+            end
+        end
+    end
+}
 
 SMODS.Blind{
     key = "nose",
