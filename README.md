@@ -32,7 +32,7 @@ The latest stable version of JMV can be found [here](https://github.com/heavyPar
 idk
 
 ## Any plans for more?
-Yes! I have more ideas for Jokers I want to add, but I'm abysmally slow at making the art. Stay tuned for new additions.
+Maybe! I have more ideas for Jokers I want to add, but I'm abysmally slow at making the art. Stay tuned for new additions.
 
 ## Check out some of the other mods that inspired this one
 - [NeatoJokers by NeatoQueen & co.](https://github.com/neatoqueen/NeatoJokers)
