@@ -17,7 +17,7 @@ local config = MOONMOD.content.config
 
 -- store mod config
 function MOONMOD.content.save_config(self)
-    --SMODS.save_mod_config(self)
+    SMODS.save_mod_config(self)
 end
 
 -- generate config menu
