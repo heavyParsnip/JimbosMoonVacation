@@ -28,7 +28,7 @@ Requires `lovely-0.7.1` and `steamodded-1.0.0~BETA~0509c` or newer
 
 The latest stable version of JMV can be found [here](https://github.com/heavyParsnip/JimbosMoonVacation/releases/latest). Just unzip it to your mod directory!
 
-## Who made this confounded mod, anyway?
+## Who made this confounded thing, anyway?
 idk
 
 ## Any plans for more?
