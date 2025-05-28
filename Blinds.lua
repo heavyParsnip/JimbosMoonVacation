@@ -229,7 +229,6 @@ SMODS.Blind{
         }
     end,
 
-
     in_pool = function(self)
         return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
@@ -308,20 +307,18 @@ SMODS.Blind{
     in_pool = function(self)
         return G.GAME.round_resets.ante >= self.boss.min and MOONMOD.content.config.enable_blinds
     end,
-    
-    disable = function(self)
-        for k, v in pairs(G.playing_cards) do
-            v.debuff = false
-        end
-    end,
 
     calculate = function(self, blind, context)
-        if context.setting_blind and not blind.disabled then
-            for k, v in pairs(G.playing_cards) do
-                if not v.ability.played_this_ante then
-                    v.debuff = true
+        if context.after and not blind.disabled then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    blind.chips = math.floor(blind.chips * 1.5)
+                    blind.chip_text = number_format(blind.chips)
+                    blind:wiggle()
+                    return true
                 end
-            end
+            }))
+            delay(0.15)
         end
     end
 }

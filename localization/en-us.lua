@@ -590,8 +590,8 @@ return {
             bl_moon_storm={
                 name="The Storm",
                 text={
-                    "Debuff all cards held",
-                    "in hand after Play"
+                    "Debuff all cards held in",
+                    "hand when playing hand"
                 },
             },
             bl_moon_boulder={
@@ -611,8 +611,8 @@ return {
             bl_moon_slab={
                 name="The Slab",
                 text={
-                    "Cards not played this",
-                    "Ante are debuffed"
+                    "Blind size increases",
+                    "by X1.5 after Play"
                 },
             },
             bl_moon_nose={
